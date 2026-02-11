@@ -17,8 +17,7 @@ namespace BookClub.Models
         [ForeignKey("Book")]
         public int BookModelId { get; set; }
         public BookModel? Book { get; set; }
-        [Required]
-        public string UserName { get; set; } 
+        public string? UserName { get; set; } 
 
         
     }
