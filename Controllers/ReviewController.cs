@@ -22,7 +22,7 @@ namespace BookClub.Controllers
         // GET: Review
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Review.Include(r => r.Book).Include(r => r.User);
+            var applicationDbContext = _context.Review.Include(r => r.Book);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,6 @@ namespace BookClub.Controllers
 
             var reviewModel = await _context.Review
                 .Include(r => r.Book)
-                .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reviewModel == null)
             {
@@ -49,8 +48,7 @@ namespace BookClub.Controllers
         // GET: Review/Create
         public IActionResult Create()
         {
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title");
             return View();
         }
 
@@ -59,16 +57,19 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Review,Comment,CreatedAt,BookModelId,UserId")] ReviewModel reviewModel)
+        public async Task<IActionResult> Create([Bind("Id,Review,Comment,CreatedAt,BookModelId")] ReviewModel reviewModel)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(reviewModel);
+
+                //Add logged in User
+                reviewModel.UserName = User.Identity?.Name ?? "Unknown";
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description", reviewModel.BookModelId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reviewModel.UserId);
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
         }
 
@@ -85,8 +86,7 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description", reviewModel.BookModelId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reviewModel.UserId);
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
         }
 
@@ -122,8 +122,7 @@ namespace BookClub.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description", reviewModel.BookModelId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reviewModel.UserId);
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
         }
 
@@ -137,7 +136,6 @@ namespace BookClub.Controllers
 
             var reviewModel = await _context.Review
                 .Include(r => r.Book)
-                .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reviewModel == null)
             {

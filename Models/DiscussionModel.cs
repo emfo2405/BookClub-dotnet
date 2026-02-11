@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace BookClub.Models
@@ -13,12 +14,11 @@ namespace BookClub.Models
         public string? Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         [Required]
+        [Display(Name = "Chapter")]
+        [ForeignKey("Chapter")]
         public int ChapterModelId { get; set; }
         public ChapterModel? Chapter { get; set; }
         [Required]
-        public string UserId { get; set; }
-        public IdentityUser User { get; set; }
-
-        
+        public string UserName { get; set; }   
     }
 }

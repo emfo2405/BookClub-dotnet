@@ -22,7 +22,7 @@ namespace BookClub.Controllers
         // GET: Discussion
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Discussion.Include(d => d.Chapter).Include(d => d.User);
+            var applicationDbContext = _context.Discussion.Include(d => d.Chapter);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +36,6 @@ namespace BookClub.Controllers
 
             var discussionModel = await _context.Discussion
                 .Include(d => d.Chapter)
-                .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (discussionModel == null)
             {
@@ -49,8 +48,7 @@ namespace BookClub.Controllers
         // GET: Discussion/Create
         public IActionResult Create()
         {
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number");
             return View();
         }
 
@@ -59,16 +57,20 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId,UserId")] DiscussionModel discussionModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(discussionModel);
+
+
+                //Add logged in User
+                discussionModel.UserName = User.Identity?.Name ?? "Unknown";
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Id", discussionModel.ChapterModelId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", discussionModel.UserId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
         }
 
@@ -85,8 +87,7 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Id", discussionModel.ChapterModelId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", discussionModel.UserId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
         }
 
@@ -95,7 +96,7 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CreatedAt,ChapterModelId,UserId")] DiscussionModel discussionModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel)
         {
             if (id != discussionModel.Id)
             {
@@ -122,8 +123,7 @@ namespace BookClub.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Id", discussionModel.ChapterModelId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", discussionModel.UserId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
         }
 
@@ -137,7 +137,6 @@ namespace BookClub.Controllers
 
             var discussionModel = await _context.Discussion
                 .Include(d => d.Chapter)
-                .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (discussionModel == null)
             {

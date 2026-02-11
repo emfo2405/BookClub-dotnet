@@ -48,7 +48,7 @@ namespace BookClub.Controllers
         // GET: Chapter/Create
         public IActionResult Create()
         {
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description");
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace BookClub.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description", chapterModel.BookModelId);
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", chapterModel.BookModelId);
             return View(chapterModel);
         }
 
@@ -82,7 +82,7 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description", chapterModel.BookModelId);
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", chapterModel.BookModelId);
             return View(chapterModel);
         }
 
@@ -118,7 +118,7 @@ namespace BookClub.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Description", chapterModel.BookModelId);
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", chapterModel.BookModelId);
             return View(chapterModel);
         }
 
