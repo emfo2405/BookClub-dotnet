@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 using BookClub.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookClub.Controllers
 {
+
     public class AuthorController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -43,6 +45,7 @@ namespace BookClub.Controllers
             return View(authorModel);
         }
 
+    [Authorize]
         // GET: Author/Create
         public IActionResult Create()
         {
@@ -65,6 +68,7 @@ namespace BookClub.Controllers
             return View(authorModel);
         }
 
+    [Authorize]
         // GET: Author/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -81,6 +85,7 @@ namespace BookClub.Controllers
             return View(authorModel);
         }
 
+    [Authorize]
         // POST: Author/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -116,6 +121,7 @@ namespace BookClub.Controllers
             return View(authorModel);
         }
 
+    [Authorize]
         // GET: Author/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -134,6 +140,7 @@ namespace BookClub.Controllers
             return View(authorModel);
         }
 
+    [Authorize]
         // POST: Author/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

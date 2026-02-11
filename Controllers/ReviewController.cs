@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 using BookClub.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookClub.Controllers
 {
@@ -45,6 +46,7 @@ namespace BookClub.Controllers
             return View(reviewModel);
         }
 
+    [Authorize]
         // GET: Review/Create
         public IActionResult Create()
         {
@@ -52,6 +54,7 @@ namespace BookClub.Controllers
             return View();
         }
 
+    [Authorize]
         // POST: Review/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -73,6 +76,7 @@ namespace BookClub.Controllers
             return View(reviewModel);
         }
 
+    [Authorize]
         // GET: Review/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -90,6 +94,7 @@ namespace BookClub.Controllers
             return View(reviewModel);
         }
 
+    [Authorize]
         // POST: Review/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -126,6 +131,7 @@ namespace BookClub.Controllers
             return View(reviewModel);
         }
 
+    [Authorize]
         // GET: Review/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -145,6 +151,7 @@ namespace BookClub.Controllers
             return View(reviewModel);
         }
 
+    [Authorize]
         // POST: Review/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
