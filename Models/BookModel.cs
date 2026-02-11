@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookClub.Models
 {
@@ -15,6 +16,8 @@ namespace BookClub.Models
         [Url]
         public string? Image { get; set; }
         [Required]
+        [Display(Name = "Author")]
+        [ForeignKey("Author")]
         public int AuthorModelId { get; set; }
         public AuthorModel? Author { get; set; }
         
