@@ -7,7 +7,7 @@ namespace BookClub.Models
         public string? Title { get; set; }
         public int? Number { get; set; }
 
-        public int BookId { get; set; }
+        public int BookModelId { get; set; }
         public BookModel? Book { get; set; }
 
         

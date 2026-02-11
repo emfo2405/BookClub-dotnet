@@ -9,7 +9,7 @@ namespace BookClub.Models
         public string? Description { get; set; }
         public string? Image { get; set; }
 
-        public int AuthorId { get; set; }
+        public int AuthorModelId { get; set; }
         public AuthorModel? Author { get; set; }
         
     }
