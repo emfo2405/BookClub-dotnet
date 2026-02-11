@@ -23,6 +23,12 @@ namespace BookClub.Controllers
         // GET: Chapter
         public async Task<IActionResult> Index()
         {
+            //Check if_context.Chapter is null
+            if(_context.Chapter == null)
+            {
+                return NotFound();
+            }
+
             var applicationDbContext = _context.Chapter.Include(c => c.Book);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -34,6 +40,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Chapter is null
+            if(_context.Chapter == null)
+            {
+                return NotFound();
+            }
+
 
             var chapterModel = await _context.Chapter
                 .Include(c => c.Book)
@@ -80,6 +92,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Chapter is null
+            if(_context.Chapter == null)
+            {
+                return NotFound();
+            }
+
 
             var chapterModel = await _context.Chapter.FindAsync(id);
             if (chapterModel == null)
@@ -135,6 +153,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Chapter is null
+            if(_context.Chapter == null)
+            {
+                return NotFound();
+            }
+
 
             var chapterModel = await _context.Chapter
                 .Include(c => c.Book)
@@ -153,6 +177,13 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            //Check if_context.Chapter is null
+            if(_context.Chapter == null)
+            {
+                return NotFound();
+            }
+
             var chapterModel = await _context.Chapter.FindAsync(id);
             if (chapterModel != null)
             {
@@ -165,6 +196,12 @@ namespace BookClub.Controllers
 
         private bool ChapterModelExists(int id)
         {
+            //Check if_context.Chapter is null
+            if(_context.Chapter == null)
+            {
+                return false;
+            }
+
             return _context.Chapter.Any(e => e.Id == id);
         }
     }

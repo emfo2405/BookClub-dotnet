@@ -23,6 +23,13 @@ namespace BookClub.Controllers
         // GET: Book
         public async Task<IActionResult> Index()
         {
+
+
+            //Check if_context.Book is null
+            if(_context.Book == null)
+            {
+                return NotFound();
+            }
             var applicationDbContext = _context.Book.Include(b => b.Author);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -34,6 +41,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Book is null
+            if(_context.Book == null)
+            {
+                return NotFound();
+            }
+
 
             var bookModel = await _context.Book
                 .Include(b => b.Author)
@@ -80,6 +93,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Book is null
+            if(_context.Book == null)
+            {
+                return NotFound();
+            }
+
 
             var bookModel = await _context.Book.FindAsync(id);
             if (bookModel == null)
@@ -135,6 +154,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Book is null
+            if(_context.Book == null)
+            {
+                return NotFound();
+            }
+
 
             var bookModel = await _context.Book
                 .Include(b => b.Author)
@@ -153,6 +178,12 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //Check if_context.Book is null
+            if(_context.Book == null)
+            {
+                return NotFound();
+            }
+
             var bookModel = await _context.Book.FindAsync(id);
             if (bookModel != null)
             {
@@ -165,6 +196,12 @@ namespace BookClub.Controllers
 
         private bool BookModelExists(int id)
         {
+            //Check if_context.Book is null
+            if(_context.Book == null)
+            {
+                return false;
+            }
+
             return _context.Book.Any(e => e.Id == id);
         }
     }

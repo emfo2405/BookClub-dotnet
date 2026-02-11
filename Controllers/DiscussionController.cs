@@ -23,6 +23,12 @@ namespace BookClub.Controllers
         // GET: Discussion
         public async Task<IActionResult> Index()
         {
+            //Check if_context.Discussion is null
+            if(_context.Discussion == null)
+            {
+                return NotFound();
+            }
+
             var applicationDbContext = _context.Discussion.Include(d => d.Chapter);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -31,6 +37,12 @@ namespace BookClub.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Check if_context.Discussion is null
+            if(_context.Discussion == null)
             {
                 return NotFound();
             }
@@ -82,6 +94,12 @@ namespace BookClub.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Check if_context.Discussion is null
+            if(_context.Discussion == null)
             {
                 return NotFound();
             }
@@ -141,6 +159,12 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            //Check if_context.Discussion is null
+            if(_context.Discussion == null)
+            {
+                return NotFound();
+            }
+
             var discussionModel = await _context.Discussion
                 .Include(d => d.Chapter)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -158,6 +182,13 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            //Check if_context.Discussion is null
+            if(_context.Discussion == null)
+            {
+                return NotFound();
+            }
+
             var discussionModel = await _context.Discussion.FindAsync(id);
             if (discussionModel != null)
             {
@@ -170,6 +201,12 @@ namespace BookClub.Controllers
 
         private bool DiscussionModelExists(int id)
         {
+            //Check if_context.Discussion is null
+            if(_context.Discussion == null)
+            {
+                return false;
+            }
+
             return _context.Discussion.Any(e => e.Id == id);
         }
     }

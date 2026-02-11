@@ -23,6 +23,13 @@ namespace BookClub.Controllers
         // GET: Review
         public async Task<IActionResult> Index()
         {
+
+            //Check if_context.Review is null
+            if(_context.Review == null)
+            {
+                return NotFound();
+            }
+
             var applicationDbContext = _context.Review.Include(r => r.Book);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -31,6 +38,12 @@ namespace BookClub.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Check if_context.Review is null
+            if(_context.Review == null)
             {
                 return NotFound();
             }
@@ -81,6 +94,12 @@ namespace BookClub.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+
+            //Check if_context.Review is null
+            if(_context.Review == null)
             {
                 return NotFound();
             }
@@ -140,6 +159,12 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            //Check if_context.Review is null
+            if(_context.Review == null)
+            {
+                return NotFound();
+            }
+
             var reviewModel = await _context.Review
                 .Include(r => r.Book)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -157,6 +182,13 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
+            //Check if_context.Review is null
+            if(_context.Review == null)
+            {
+                return NotFound();
+            }
+
             var reviewModel = await _context.Review.FindAsync(id);
             if (reviewModel != null)
             {
@@ -169,6 +201,12 @@ namespace BookClub.Controllers
 
         private bool ReviewModelExists(int id)
         {
+            //Check if_context.Review is null
+            if(_context.Review == null)
+            {
+                return false;
+            }
+            
             return _context.Review.Any(e => e.Id == id);
         }
     }

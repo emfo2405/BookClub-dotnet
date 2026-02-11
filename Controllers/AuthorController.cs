@@ -24,6 +24,12 @@ namespace BookClub.Controllers
         // GET: Author
         public async Task<IActionResult> Index()
         {
+            //Check if_context.Author is null
+            if(_context.Author == null)
+            {
+                return NotFound();
+            }
+
             return View(await _context.Author.ToListAsync());
         }
 
@@ -34,6 +40,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Author is null
+            if(_context.Author == null)
+            {
+                return NotFound();
+            }
+
 
             var authorModel = await _context.Author
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -76,6 +88,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Author is null
+            if(_context.Author == null)
+            {
+                return NotFound();
+            }
+
 
             var authorModel = await _context.Author.FindAsync(id);
             if (authorModel == null)
@@ -129,6 +147,12 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            //Check if_context.Author is null
+            if(_context.Author == null)
+            {
+                return NotFound();
+            }
+
 
             var authorModel = await _context.Author
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -146,6 +170,12 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //Check if_context.Author is null
+            if(_context.Author == null)
+            {
+                return NotFound();
+            }
+
             var authorModel = await _context.Author.FindAsync(id);
             if (authorModel != null)
             {
@@ -158,6 +188,12 @@ namespace BookClub.Controllers
 
         private bool AuthorModelExists(int id)
         {
+            //Check if_context.Author is null
+            if(_context.Author == null)
+            {
+                return false;
+            }
+
             return _context.Author.Any(e => e.Id == id);
         }
     }
