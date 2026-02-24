@@ -50,6 +50,7 @@ namespace BookClub.Controllers
 
             var bookModel = await _context.Book
                 .Include(b => b.Author)
+                .Include(b => b.Reviews)
                 .Include(c => c.Chapters)
                 .ThenInclude(d => d.Discussions)
                     .ThenInclude(e => e.User)

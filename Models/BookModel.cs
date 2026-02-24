@@ -22,5 +22,6 @@ namespace BookClub.Models
         public AuthorModel? Author { get; set; }
         
         public ICollection<ChapterModel> Chapters {get; set;} = new List<ChapterModel>();
+        public ICollection<ReviewModel> Reviews {get; set;} = new List<ReviewModel>();
     }
 }

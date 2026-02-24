@@ -23,6 +23,7 @@ public class HomeController : Controller
             .FirstOrDefaultAsync();
 
             return View(currentBook);
+
     }
 
 
