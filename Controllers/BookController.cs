@@ -51,6 +51,8 @@ namespace BookClub.Controllers
             var bookModel = await _context.Book
                 .Include(b => b.Author)
                 .Include(c => c.Chapters)
+                .ThenInclude(d => d.Discussions)
+                    .ThenInclude(e => e.User)
 
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (bookModel == null)

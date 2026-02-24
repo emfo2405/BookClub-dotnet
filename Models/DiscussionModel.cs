@@ -19,5 +19,8 @@ namespace BookClub.Models
         public int ChapterModelId { get; set; }
         public ChapterModel? Chapter { get; set; }
         public string? UserName { get; set; }   
+        public string? UserId {get; set;}
+        [ForeignKey("UserId")]
+        public IdentityUser? User {get; set;}
     }
 }
