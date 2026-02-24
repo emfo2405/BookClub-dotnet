@@ -68,6 +68,11 @@
     <p>Inga diskussionsinlägg finns</p>
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Skapa ett nytt inlägg</a>
+}
+
     }
 </div>
 
