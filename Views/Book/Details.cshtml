@@ -47,8 +47,16 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+                @if (ViewData["AverageRating"] != null)
+            {
+                <p>@string.Format("{0:0.0} / 10", ViewData["AverageRating"])</p>
+            } else {
+                <p>Inget betyg gett ännu</p>
+            }
+
 <div>
     <h2>Diskussionsforum för varje kapitel:</h2>
+
 
     @foreach (var chapter in Model.Chapters.OrderBy(c => c.Number))
     {
