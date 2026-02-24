@@ -1,8 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model BookClub.Models.BookModel
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>Månadens bok</h1>
+    @if (Model != null)
+    {
+        <img src="@Model.Image" />
+        <h3>@Model.Title</h3>
+        <h4>@Model.Author?.Name</h4>
+        <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">Visa information</a>
+    }
 </div>
