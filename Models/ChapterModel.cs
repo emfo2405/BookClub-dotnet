@@ -16,6 +16,7 @@ namespace BookClub.Models
         public int BookModelId { get; set; }
         public BookModel? Book { get; set; }
 
+        public ICollection<DiscussionModel> Discussions {get; set;} = new List<DiscussionModel>();
         
     }
 }
