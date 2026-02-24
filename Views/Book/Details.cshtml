@@ -47,4 +47,28 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<div>
+    <h2>Diskussionsforum för varje kapitel:</h2>
+
+    @foreach (var chapter in Model.Chapters.OrderBy(c => c.Number))
+    {
+        <h4>Kapitel @chapter.Number - @chapter.Title</h4>
+
+@if (chapter.Discussions != null && chapter.Discussions.Any())
+{
+            @foreach (var discussion in chapter.Discussions.OrderBy(d => d.CreatedAt))
+        {
+            <p>@discussion.User?.UserName</p>
+            <p>@discussion.CreatedAt</p>
+
+            <h5>@discussion.Title</h5>
+            <p>@discussion.Content</p>
+        }
+} else {
+    <p>Inga diskussionsinlägg finns</p>
+}
+
+    }
+</div>
+
 
