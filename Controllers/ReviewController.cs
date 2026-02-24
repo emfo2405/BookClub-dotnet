@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 using BookClub.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BookClub.Controllers
 {
@@ -77,11 +78,11 @@ namespace BookClub.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(reviewModel);
 
                 //Add logged in User
                 reviewModel.UserName = User.Identity?.Name ?? "Unknown";
 
+                _context.Add(reviewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
