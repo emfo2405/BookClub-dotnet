@@ -56,6 +56,17 @@ namespace BookClub.Controllers
                     .ThenInclude(e => e.User)
 
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+
+            //Beräkna medelvärdet av en boks betyg
+            double? averageRating = null;
+            if (bookModel.Reviews != null && bookModel.Reviews.Any())
+            {
+                averageRating = bookModel.Reviews.Average(r => r.Review);
+            }
+
+            ViewData["AverageRating"] = averageRating;
+
             if (bookModel == null)
             {
                 return NotFound();
