@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using BookClub.Models;
 using BookClub.Data;
 using Microsoft.EntityFrameworkCore;
+using BookClub.Models;
 
 namespace BookClub.Controllers;
 
@@ -22,7 +23,23 @@ public class HomeController : Controller
             .OrderByDescending(b => b.Id)
             .FirstOrDefaultAsync();
 
-            return View(currentBook);
+    //Visa högst betygsatta böcker
+    var topRated = await _context.Book
+        .Include(b => b.Author)
+        .Include(b => b.Reviews)
+        .OrderByDescending(b => b.Reviews.Any()
+        ? b.Reviews.Average(r => r.Review) : 0)
+        .Take(3)
+        .ToListAsync();
+
+        var showView = new HomeModel
+        {
+            CurrentBook = currentBook,
+            TopRated = topRated
+        };
+
+            return View(showView);
+
 
     }
 

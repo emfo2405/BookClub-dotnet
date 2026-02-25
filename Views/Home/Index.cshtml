@@ -1,15 +1,31 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-@model BookClub.Models.BookModel
+@model BookClub.Models.HomeModel
 
 <div class="text-center">
     <h1>Månadens bok</h1>
-    @if (Model != null)
+    @if (Model.CurrentBook != null)
     {
-        <img src="@Model.Image" />
-        <h3>@Model.Title</h3>
-        <h4>@Model.Author?.Name</h4>
-        <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.Id">Visa information</a>
+        <img src="@Model.CurrentBook.Image" />
+        <h3>@Model.CurrentBook.Title</h3>
+        <h4>@Model.CurrentBook.Author?.Name</h4>
+        <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.CurrentBook.Id">Visa information</a>
     }
 </div>
+
+<h2>Böcker med högst betyg</h2>
+
+@foreach (var book in Model.TopRated)
+{
+var average = book.Reviews.Any()
+? book.Reviews.Average(r => r.Review)
+: 0;
+
+<div>
+    <img src="@book.Image" />
+    <h4>@book.Title</h4>
+    <p>@average?.ToString("0.0") </p>
+</div>
+}
+
