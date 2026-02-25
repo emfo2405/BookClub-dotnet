@@ -83,6 +83,11 @@
     <p>Inga diskussionsinlägg finns</p>
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Skapa ett nytt inlägg</a>
+}
+
 <h2>Betyg för boken</h2>
 
 @foreach (var review in Model.Reviews.OrderBy(r => r.Id))
@@ -95,7 +100,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Skapa ett nytt inlägg</a>
+    <a asp-controller="Reviews" asp-action="Create" asp-route-bookId="@Model.Id">Skapa ett nytt inlägg</a>
 }
 
     }
