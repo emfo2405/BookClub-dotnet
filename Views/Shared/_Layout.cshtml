@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@inject BookClub.Data.ApplicationDbContext _context
+
+@{
+            var bookOfMonth = _context.Book
+            .OrderByDescending(b => b.Id)
+            .FirstOrDefault();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,7 +32,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Böcker</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Alla böcker</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Book" asp-action="Details" asp-route-id="@bookOfMonth?.Id">Månadens bok</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Discussion" asp-action="Index">Diskussionsforum</a>

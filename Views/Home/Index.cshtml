@@ -14,6 +14,13 @@
     }
 </div>
 
+@if (Model.LatestComment != null)
+{
+    <h3>@Model.LatestComment.Title</h3>
+    <p>@Model.LatestComment.Content</p>
+    <p>@Model.LatestComment.UserName</p>
+}
+
 <h2>Böcker med högst betyg</h2>
 
 @foreach (var book in Model.TopRated)

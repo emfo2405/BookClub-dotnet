@@ -18,10 +18,21 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
+        //Visa senaste bok och senaste kommentar
         var currentBook = await _context.Book
             .Include(b => b.Author)
+            .Include(d => d.Chapters)
+            .ThenInclude(c => c.Discussions)
+            .ThenInclude(d => d.User)
             .OrderByDescending(b => b.Id)
             .FirstOrDefaultAsync();
+
+
+        var latestComment = currentBook?.Chapters
+        .SelectMany(c => c.Discussions)
+        .OrderByDescending(d => d.Id)
+        .FirstOrDefault();
+
 
     //Visa högst betygsatta böcker
     var topRated = await _context.Book
@@ -35,7 +46,8 @@ public class HomeController : Controller
         var showView = new HomeModel
         {
             CurrentBook = currentBook,
-            TopRated = topRated
+            TopRated = topRated,
+            LatestComment = latestComment
         };
 
             return View(showView);
