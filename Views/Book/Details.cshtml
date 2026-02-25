@@ -43,8 +43,15 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (User.Identity.IsAuthenticated)
+{
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera information</a> 
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+<a asp-action="Index">Visa alla böcker</a>
+}
 </div>
 
                 @if (ViewData["AverageRating"] != null)
@@ -74,6 +81,16 @@
         }
 } else {
     <p>Inga diskussionsinlägg finns</p>
+}
+
+<h2>Betyg för boken</h2>
+
+@foreach (var review in Model.Reviews.OrderBy(r => r.Id))
+{
+    <h2>@review.Review</h2>
+    <h3>@review.Comment</h3>
+    <p>@review.CreatedAt</p>
+    <p>@review.UserName</p>
 }
 
 @if (User.Identity.IsAuthenticated)
