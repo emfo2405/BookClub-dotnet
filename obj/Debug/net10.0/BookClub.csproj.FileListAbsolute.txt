@@ -418,8 +418,6 @@ C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\fdang8toj1-{0}-muycvpuwrr-muycvpuwrr.gz
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\ojxfchvrer-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\qp6xulab49-{0}-mlv21k5csn-mlv21k5csn.gz
-C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\vp16raoste-{0}-7tbpck8qgf-7tbpck8qgf.gz
-C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\qehfz85m3j-{0}-7tbpck8qgf-7tbpck8qgf.gz
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\staticwebassets.development.json
@@ -431,3 +429,5 @@ C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\BookClub.pdb
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\BookClub.genruntimeconfig.cache
 C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\ref\BookClub.dll
+C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\vp16raoste-{0}-hb70gvht5w-hb70gvht5w.gz
+C:\Users\emma_\Desktop\Webbutveckling-Program\Läsperiod_7\.net\projekt\BookClub\obj\Debug\net10.0\compressed\qehfz85m3j-{0}-hb70gvht5w-hb70gvht5w.gz
