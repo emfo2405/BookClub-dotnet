@@ -31,7 +31,7 @@
         </div>
        <div class="col-sm-8 my-auto">
         <h3>@Model.CurrentBook.Title - @Model.CurrentBook.Author?.Name</h3>
-        <p>@Model.CurrentBook.Description</p>
+        <p>@Model.CurrentBook.ShortDescription</p>
         <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.CurrentBook.Id">Gå till bokens sida</a>
         </div>
     }

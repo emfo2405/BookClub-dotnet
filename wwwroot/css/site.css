@@ -69,3 +69,13 @@ a {
 .showBooksBtn:hover {
   background-color: #e0e4cf;
 }
+
+.bookDisplayImg {
+  width: 200px;
+}
+
+.bookList {
+  display: grid;
+  grid-template-columns: repeat(2, 3fr);
+  text-align: center;
+}

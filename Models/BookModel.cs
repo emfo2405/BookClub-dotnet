@@ -13,6 +13,13 @@ namespace BookClub.Models
         public int? Year { get; set; }
         [Required]
         public string? Description { get; set; }
+
+        public string ShortDescription => 
+        string.IsNullOrEmpty(Description)
+        ? ""
+        : Description.Length > 250 
+            ? Description.Substring(0, 250) + "..."
+            : Description; 
         [Url]
         public string? Image { get; set; }
         [Required]
