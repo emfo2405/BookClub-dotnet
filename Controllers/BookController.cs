@@ -30,7 +30,7 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-            var applicationDbContext = _context.Book.Include(b => b.Author);
+            var applicationDbContext = _context.Book.Include(b => b.Author).Include(b => b.Reviews);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -57,15 +57,6 @@ namespace BookClub.Controllers
 
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-
-            //Beräkna medelvärdet av en boks betyg
-            double? averageRating = null;
-            if (bookModel.Reviews != null && bookModel.Reviews.Any())
-            {
-                averageRating = bookModel.Reviews.Average(r => r.Review);
-            }
-
-            ViewData["AverageRating"] = averageRating;
 
             if (bookModel == null)
             {

@@ -30,5 +30,11 @@ namespace BookClub.Models
         
         public ICollection<ChapterModel> Chapters {get; set;} = new List<ChapterModel>();
         public ICollection<ReviewModel> Reviews {get; set;} = new List<ReviewModel>();
+
+        [NotMapped]
+        public double? AverageRating =>
+        Reviews != null && Reviews.Any(r => r.Review.HasValue)
+        ? Reviews.Where(r => r.Review.HasValue).Average(r => r.Review.Value)
+        : null;
     }
 }
