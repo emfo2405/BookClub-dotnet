@@ -98,8 +98,12 @@ namespace BookClub.Controllers
                 reviewModel.UserName = User.Identity?.Name ?? "Unknown";
                 reviewModel.UserId = userId;
                 _context.Add(reviewModel);
+
+
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));                    
+                
+
             }
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
@@ -141,14 +145,14 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Review,Comment,CreatedAt,BookModelId,UserId")] ReviewModel reviewModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Review,Comment,CreatedAt,BookModelId,UserId, UserName")] ReviewModel reviewModel)
         {
             if (id != reviewModel.Id)
             {
                 return NotFound();
             }
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+           var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (ModelState.IsValid && reviewModel.UserId == userId)
             {
                 try
@@ -167,6 +171,7 @@ namespace BookClub.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
@@ -200,6 +205,8 @@ namespace BookClub.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (reviewModel.UserId != userId) return Forbid();
 
+            ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
+
             return View(reviewModel);
         }
 
@@ -207,7 +214,7 @@ namespace BookClub.Controllers
         // POST: Review/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string returnUrl)
         {
 
             //Check if_context.Review is null
@@ -226,6 +233,12 @@ namespace BookClub.Controllers
             } else
             {
                 return Forbid();
+            }
+
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                await _context.SaveChangesAsync();
+                return Redirect(returnUrl);
             }
 
             await _context.SaveChangesAsync();
