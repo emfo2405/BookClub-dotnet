@@ -49,6 +49,7 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+
             var reviewModel = await _context.Review
                 .Include(r => r.Book)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -56,6 +57,8 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+
+
 
             return View(reviewModel);
         }
