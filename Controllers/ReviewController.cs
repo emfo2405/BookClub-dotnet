@@ -186,6 +186,10 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            //Skydda view för personer som inte skapade inlägget
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (reviewModel.UserId != userId) return Forbid();
+
             return View(reviewModel);
         }
 
@@ -202,10 +206,21 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var reviewModel = await _context.Review.FindAsync(id);
-            if (reviewModel != null)
+            
+
+            Console.WriteLine($"Inloggad användare {userId}");
+            Console.WriteLine($"Review användare {reviewModel?.UserId}");
+            Console.WriteLine($"Är samma id {reviewModel?.UserId == userId}");
+
+            if (reviewModel != null && reviewModel.UserId == userId)
             {
                 _context.Review.Remove(reviewModel);
+            } else
+            {
+                return Forbid();
             }
 
             await _context.SaveChangesAsync();
