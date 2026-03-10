@@ -53,8 +53,14 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            if (User.IsInRole("Admin"))
+            {
+            return View(authorModel);                
+            } else
+            {
+                return View("AccessDenied");               
+            }
 
-            return View(authorModel);
         }
 
     [Authorize]
@@ -71,7 +77,7 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Country")] AuthorModel authorModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 _context.Add(authorModel);
                 await _context.SaveChangesAsync();
@@ -100,7 +106,14 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-            return View(authorModel);
+            if(User.IsInRole("Admin"))
+            {
+            return View(authorModel);                
+            } else
+            {
+                return View("AccessDenied");
+            }
+
         }
 
     [Authorize]
@@ -116,7 +129,7 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 try
                 {
@@ -160,8 +173,14 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            if (User.IsInRole("Admin"))
+            {
+            return View(authorModel);                
+            } else
+            {
+                return View("AccessDenied");
+            }
 
-            return View(authorModel);
         }
 
     [Authorize]
@@ -177,7 +196,7 @@ namespace BookClub.Controllers
             }
 
             var authorModel = await _context.Author.FindAsync(id);
-            if (authorModel != null)
+            if (authorModel != null && User.IsInRole("Admin"))
             {
                 _context.Author.Remove(authorModel);
             }

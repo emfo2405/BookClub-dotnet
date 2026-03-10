@@ -55,8 +55,14 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-
-            return View(chapterModel);
+            if(User.IsInRole("Admin"))
+            {
+             return View(chapterModel);   
+            } else
+            {
+                return View("AccessDenied");
+            }
+            
         }
 
     [Authorize]
