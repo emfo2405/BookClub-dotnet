@@ -18,6 +18,7 @@ namespace BookClub.Models
         public int BookModelId { get; set; }
         public BookModel? Book { get; set; }
         public string? UserName { get; set; } 
+        public string? UserId { get; set; }
 
         
     }

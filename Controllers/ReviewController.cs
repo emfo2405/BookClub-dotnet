@@ -76,12 +76,24 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Review,Comment,CreatedAt,BookModelId")] ReviewModel reviewModel)
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            //Kontrollera om ettbetyg redan är lämnat av användaren
+            bool reviewExists = await _context.Review
+            .AnyAsync(r => r.BookModelId == reviewModel.BookModelId && r.UserId == userId);
+
+            //Om ett betyg redan har getts av användaren
+            if(reviewExists)
+            {
+            ModelState.AddModelError("", "Ett betyg har redan lämnats för den här boken");
+            }
+
             if (ModelState.IsValid)
             {
 
                 //Add logged in User
                 reviewModel.UserName = User.Identity?.Name ?? "Unknown";
-
+                reviewModel.UserId = userId;
                 _context.Add(reviewModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -6,43 +6,44 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>BookModel</h4>
+<div class="w-75 d-block mx-auto">
+    <h4 class="text-center">@Html.DisplayFor(model => model.Title) <br /> @Html.DisplayFor(model => model.Author.Name)</h4>
+    <img class="d-block mx-auto" src="@Model.Image" />
     <hr />
-    <dl class="row">
+    <dl class="row ">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Year)
+            År
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Year)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            Beskrivning
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Author)
+            Land
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Author.Country)
         </dd>
+
     </dl>
 </div>
-<div>
+
+<div class="w-25 d-block mx-auto mt-5">
+                @if (ViewData["AverageRating"] != null)
+            {
+                <p>@string.Format("{0:0.0} / 10", ViewData["AverageRating"])</p>
+            } else {
+                <p>Inget betyg gett ännu</p>
+            }    
+</div>
+
+
+<div class="w-50 d-block mx-auto">
     @if (User.Identity.IsAuthenticated)
 {
     <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera information</a> 
@@ -54,15 +55,11 @@
 }
 </div>
 
-                @if (ViewData["AverageRating"] != null)
-            {
-                <p>@string.Format("{0:0.0} / 10", ViewData["AverageRating"])</p>
-            } else {
-                <p>Inget betyg gett ännu</p>
-            }
 
-<div>
-    <h2>Diskussionsforum för varje kapitel:</h2>
+
+
+<div class="mt-5 w-75 mx-auto">
+    <h2 class="mb-5">Diskussionsforum för varje kapitel:</h2>
 
 
     @foreach (var chapter in Model.Chapters.OrderBy(c => c.Number))
@@ -85,10 +82,10 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Skapa ett nytt inlägg</a>
+    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Lämna en kommentar</a>
 }
 
-<h2>Betyg för boken</h2>
+<h2 class="mb-5 mt-5">Betyg för boken</h2>
 
 @foreach (var review in Model.Reviews.OrderBy(r => r.Id))
 {
@@ -100,7 +97,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Reviews" asp-action="Create" asp-route-bookId="@Model.Id">Skapa ett nytt inlägg</a>
+    <a asp-controller="Review" asp-action="Create" asp-route-bookId="@Model.Id">Ge ett betyg</a>
 }
 
     }
