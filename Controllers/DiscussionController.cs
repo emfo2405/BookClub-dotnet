@@ -62,6 +62,7 @@ namespace BookClub.Controllers
         // GET: Discussion/Create
         public IActionResult Create()
         {
+            ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number");
             return View();
         }
@@ -72,7 +73,7 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -83,6 +84,11 @@ namespace BookClub.Controllers
                 discussionModel.UserName = User.Identity?.Name ?? "Unknown";
 
                 await _context.SaveChangesAsync();
+
+                            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
@@ -109,6 +115,7 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
         }
@@ -119,7 +126,7 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel)
+        public async Task<IActionResult> Edit(int id, string returnUrl, [Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel)
         {
             if (id != discussionModel.Id)
             {
@@ -144,6 +151,11 @@ namespace BookClub.Controllers
                         throw;
                     }
                 }
+
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
@@ -173,6 +185,7 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             return View(discussionModel);
         }
 
@@ -180,7 +193,7 @@ namespace BookClub.Controllers
         // POST: Discussion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string returnUrl)
         {
 
             //Check if_context.Discussion is null
@@ -196,6 +209,10 @@ namespace BookClub.Controllers
             }
 
             await _context.SaveChangesAsync();
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
             return RedirectToAction(nameof(Index));
         }
 

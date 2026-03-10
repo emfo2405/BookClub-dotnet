@@ -105,7 +105,6 @@ namespace BookClub.Controllers
 
             if (!string.IsNullOrEmpty(returnUrl))
             {
-                await _context.SaveChangesAsync();
                 return Redirect(returnUrl);
             }
                 return RedirectToAction(nameof(Index));                    
@@ -245,14 +244,13 @@ namespace BookClub.Controllers
             {
                 return Forbid();
             }
-
+            await _context.SaveChangesAsync();
             if (!string.IsNullOrEmpty(returnUrl))
             {
-                await _context.SaveChangesAsync();
                 return Redirect(returnUrl);
             }
 
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
