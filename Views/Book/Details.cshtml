@@ -44,15 +44,15 @@
 
 
 <div class="w-50 d-block mx-auto">
-    @if (User.Identity.IsAuthenticated)
+    @if (User.IsInRole("Admin"))
 {
     <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera information</a> 
 }
 
-@if (User.Identity.IsAuthenticated)
-{
+
+
 <a asp-action="Index">Visa alla böcker</a>
-}
+
 </div>
 
 

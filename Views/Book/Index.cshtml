@@ -7,7 +7,7 @@
 <h1 class="text-center m-5">Våra böcker</h1>
 
 <p class="text-center p-2">
-    @if (User.Identity.IsAuthenticated)
+    @if (User.IsInRole("Admin"))
     {
         <a asp-action="Create">Lägg till en ny bok</a>
     }
@@ -29,7 +29,7 @@
     </div>
     <br />
 
-@if (User.Identity.IsAuthenticated)
+@if (User.IsInRole("Admin"))
 {
     <a asp-action="Edit" asp-route-id="@item.Id">Uppdatera</a>
     <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>

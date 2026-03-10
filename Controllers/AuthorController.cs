@@ -67,7 +67,14 @@ namespace BookClub.Controllers
         // GET: Author/Create
         public IActionResult Create()
         {
-            return View();
+            if(User.IsInRole("Admin"))
+            {
+            return View();                
+            } else
+            {
+                return View("AccessDenied");
+            }
+
         }
 
         // POST: Author/Create
