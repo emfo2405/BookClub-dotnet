@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 using BookClub.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace BookClub.Controllers
 {
@@ -62,8 +63,15 @@ namespace BookClub.Controllers
         // GET: Chapter/Create
         public IActionResult Create()
         {
+            if (User.IsInRole("Admin"))
+            {
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title");
-            return View();
+            return View();   
+            } else
+            {
+            return View("AccessDenied");
+            }
+
         }
 
     [Authorize]
@@ -74,7 +82,8 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Number,BookModelId")] ChapterModel chapterModel)
         {
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 _context.Add(chapterModel);
                 await _context.SaveChangesAsync();
@@ -104,8 +113,15 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            if (User.IsInRole("Admin"))
+            {
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", chapterModel.BookModelId);
-            return View(chapterModel);
+            return View(chapterModel);                
+            } else
+            {
+                return View("AccessDenied");
+            }
+
         }
 
     [Authorize]
@@ -121,7 +137,7 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 try
                 {
@@ -167,8 +183,14 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
-
-            return View(chapterModel);
+            if(User.IsInRole("Admin"))
+            {
+            return View(chapterModel);    
+            } else
+            {
+                return View("AccessDenied");
+            }
+            
         }
 
     [Authorize]
@@ -185,7 +207,7 @@ namespace BookClub.Controllers
             }
 
             var chapterModel = await _context.Chapter.FindAsync(id);
-            if (chapterModel != null)
+            if (chapterModel != null && User.IsInRole("Admin"))
             {
                 _context.Chapter.Remove(chapterModel);
             }
