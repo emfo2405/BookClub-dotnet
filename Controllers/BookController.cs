@@ -70,8 +70,15 @@ namespace BookClub.Controllers
         // GET: Book/Create
         public IActionResult Create()
         {
-            ViewData["AuthorModelId"] = new SelectList(_context.Author, "Id", "Name");
-            return View();
+            if(User.IsInRole("Admin"))
+            {
+                        ViewData["AuthorModelId"] = new SelectList(_context.Author, "Id", "Name");
+            return View();    
+            } else
+            {
+                return View("AccessDenied");
+            }
+
         }
 
     [Authorize]
@@ -82,7 +89,7 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Year,Description,Image,AuthorModelId")] BookModel bookModel)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 _context.Add(bookModel);
                 await _context.SaveChangesAsync();
@@ -112,8 +119,15 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            if(User.IsInRole("Admin"))
+            {
             ViewData["AuthorModelId"] = new SelectList(_context.Author, "Id", "Name", bookModel.AuthorModelId);
-            return View(bookModel);
+            return View(bookModel);                
+            } else
+            {
+                return View("AccessDenied");
+            }
+
         }
 
     [Authorize]
@@ -129,7 +143,7 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 try
                 {
@@ -175,8 +189,13 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+            if(User.IsInRole("Admin"))
+            {
+            return View(bookModel);                
+            } else {
+            return View("AccessDenied");    
+            }
 
-            return View(bookModel);
         }
 
     [Authorize]
@@ -192,7 +211,7 @@ namespace BookClub.Controllers
             }
 
             var bookModel = await _context.Book.FindAsync(id);
-            if (bookModel != null)
+            if (bookModel != null &&User.IsInRole("Admin"))
             {
                 _context.Book.Remove(bookModel);
             }
