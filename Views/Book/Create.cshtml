@@ -47,6 +47,16 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<div>
+    <h4>Glöm inte att lägga till kapitel för boken för att öppna diskussionsformuläret</h4>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Chapter" asp-action="Create">Lägg till kapitel</a>
+</div>
+
+<div>
+    <h4>Lägg till en ny författare</h4>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Author" asp-action="Create">Skapa en ny författarprofil</a>
+</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

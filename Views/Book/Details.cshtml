@@ -62,7 +62,7 @@
     <h2 class="mb-5">Diskussionsforum för varje kapitel:</h2>
 
 
-    @foreach (var chapter in Model.Chapters.OrderBy(c => c.Number))
+    @foreach (ChapterModel chapter in Model.Chapters.OrderBy(c => c.Number))
     {
         <h4>Kapitel @chapter.Number - @chapter.Title</h4>
 
@@ -84,7 +84,7 @@
 {
     <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Lämna en kommentar</a>
 }
-
+}
 <h2 class="mb-5 mt-5">Betyg för boken</h2>
 
 @foreach (var review in Model.Reviews.OrderBy(r => r.Id))
@@ -100,7 +100,7 @@
     <a asp-controller="Review" asp-action="Create" asp-route-bookId="@Model.Id">Ge ett betyg</a>
 }
 
-    }
+    
 </div>
 
 
