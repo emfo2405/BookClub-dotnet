@@ -59,7 +59,7 @@ namespace BookClub.Controllers
             }
 
 
-
+            
             return View(reviewModel);
         }
 
@@ -67,6 +67,7 @@ namespace BookClub.Controllers
         // GET: Review/Create
         public IActionResult Create()
         {
+            ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title");
             return View();
         }
@@ -77,7 +78,7 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Review,Comment,CreatedAt,BookModelId")] ReviewModel reviewModel)
+        public async Task<IActionResult> Create([Bind("Id,Review,Comment,CreatedAt,BookModelId")] ReviewModel reviewModel, string returnUrl)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -101,6 +102,12 @@ namespace BookClub.Controllers
 
 
                 await _context.SaveChangesAsync();
+
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                await _context.SaveChangesAsync();
+                return Redirect(returnUrl);
+            }
                 return RedirectToAction(nameof(Index));                    
                 
 
@@ -134,7 +141,7 @@ namespace BookClub.Controllers
             //Endast skaparen av en recension ska kunna gå in på den
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (reviewModel.UserId != userId) return Forbid();
-
+            ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
         }
@@ -145,7 +152,7 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Review,Comment,CreatedAt,BookModelId,UserId, UserName")] ReviewModel reviewModel)
+        public async Task<IActionResult> Edit(int id, string returnUrl, [Bind("Id,Review,Comment,CreatedAt,BookModelId,UserId, UserName")] ReviewModel reviewModel)
         {
             if (id != reviewModel.Id)
             {
@@ -171,6 +178,10 @@ namespace BookClub.Controllers
                         throw;
                     }
                 }
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
 
                 return RedirectToAction(nameof(Index));
             }

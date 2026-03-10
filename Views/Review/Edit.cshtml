@@ -15,6 +15,7 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" asp-for="UserName" />
+            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
             <div class="form-group">
                 <label asp-for="Review" class="control-label"></label>
                 <input asp-for="Review" class="form-control" />
