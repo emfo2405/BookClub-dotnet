@@ -117,11 +117,17 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            
             var reviewModel = await _context.Review.FindAsync(id);
             if (reviewModel == null)
             {
                 return NotFound();
             }
+
+            //Endast skaparen av en recension ska kunna gå in på den
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (reviewModel.UserId != userId) return Forbid();
+
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
         }
@@ -139,7 +145,8 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (ModelState.IsValid && reviewModel.UserId == userId)
             {
                 try
                 {
@@ -209,11 +216,6 @@ namespace BookClub.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var reviewModel = await _context.Review.FindAsync(id);
-            
-
-            Console.WriteLine($"Inloggad användare {userId}");
-            Console.WriteLine($"Review användare {reviewModel?.UserId}");
-            Console.WriteLine($"Är samma id {reviewModel?.UserId == userId}");
 
             if (reviewModel != null && reviewModel.UserId == userId)
             {
