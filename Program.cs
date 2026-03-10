@@ -2,6 +2,24 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 
+//Lägga till roller till användare
+static async Task SetAdmin(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+
+    var adminUser = await userManager.FindByEmailAsync("emfo2405@student.miun.se");
+    if(adminUser != null)
+    {
+        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+.AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
@@ -42,5 +61,10 @@ app.MapControllerRoute(
 
 app.MapRazorPages()
    .WithStaticAssets();
+
+   using (var scope = app.Services.CreateScope())
+{
+    await SetAdmin(scope.ServiceProvider);
+}
 
 app.Run();
