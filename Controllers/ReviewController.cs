@@ -213,7 +213,7 @@ namespace BookClub.Controllers
 
             //Skydda view för personer som inte skapade inlägget
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (reviewModel.UserId != userId) return Forbid();
+            if (reviewModel.UserId != userId && !User.IsInRole("Admin")) return Forbid();
 
             ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
 
@@ -237,7 +237,7 @@ namespace BookClub.Controllers
 
             var reviewModel = await _context.Review.FindAsync(id);
 
-            if (reviewModel != null && reviewModel.UserId == userId)
+            if (reviewModel != null && reviewModel.UserId == userId || User.IsInRole("Admin"))
             {
                 _context.Review.Remove(reviewModel);
             } else

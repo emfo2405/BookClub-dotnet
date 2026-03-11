@@ -99,7 +99,7 @@
     <p>@review.CreatedAt</p>
     <p>@review.UserName</p>
 
-    @if (User.Identity.Name == review.UserName) {
+    @if (User.Identity.Name == review.UserName || User.IsInRole("Admin")) {
         <a asp-controller="Review" asp-action="Edit" asp-route-id="@review.Id">Uppdatera</a>
         <a asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id">Radera</a>
     }
