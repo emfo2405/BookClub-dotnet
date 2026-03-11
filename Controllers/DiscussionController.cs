@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 using BookClub.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BookClub.Controllers
 {
@@ -115,6 +116,11 @@ namespace BookClub.Controllers
             {
                 return NotFound();
             }
+
+            //Förhindra att andra än skaparen kan redigera inlägget
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (discussionModel.UserId != userId) return Forbid();
+
             ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
@@ -133,7 +139,8 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (ModelState.IsValid && discussionModel.UserId == userId)
             {
                 try
                 {
@@ -185,6 +192,10 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            //Skydda view från personer som inte är skapare eller admin
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (discussionModel.UserId != userId && !User.IsInRole("Admin")) return Forbid();
+
             ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
             return View(discussionModel);
         }
@@ -202,8 +213,9 @@ namespace BookClub.Controllers
                 return NotFound();
             }
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var discussionModel = await _context.Discussion.FindAsync(id);
-            if (discussionModel != null)
+            if (discussionModel != null && discussionModel.UserId == userId || User.IsInRole("Admin"));
             {
                 _context.Discussion.Remove(discussionModel);
             }
