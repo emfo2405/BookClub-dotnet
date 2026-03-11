@@ -9,33 +9,38 @@
 <p class="text-center p-2">
     @if (User.IsInRole("Admin"))
     {
-        <a asp-action="Create">Lägg till en ny bok</a>
+        <a asp-action="Create" class="showBooksBtn">Lägg till en ny bok</a>
     }
     
 </p>
 
-<div class="bookList">
+<div class="bookList mt-5">
 @foreach (var item in Model) {
-    <div>
+    <div class="mb-5 mt-3 oneBook">
     <img class="bookDisplayImg" src="@item.Image" />
     <h3>@Html.DisplayFor(modelItem => item.Title) <br /> @Html.DisplayFor(modelItem => item.Author.Name)</h3>
     <h4>@Html.DisplayFor(modelItem => item.Year)</h4>
     <p> ⭐ @(item.AverageRating?.ToString("0.0")
         ?? "-")
     </p>
-    <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#description-@item.Id">Visa beskrivning</a> 
-    <div class="collapse" id="description-@item.Id">
+    <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#description-@item.Id">Visa beskrivning ⏷</a> 
+    <div class="collapse descriptionView" id="description-@item.Id">
     <p class="text-start p-4">@Html.DisplayFor(modelItem => item.Description)</p>        
     </div>
     <br />
 
+    <a asp-action="Details" asp-route-id="@item.Id" class="mt-2 showInfo">Gå till bokens sida</a>  <br />  
+
 @if (User.IsInRole("Admin"))
-{
-    <a asp-action="Edit" asp-route-id="@item.Id">Uppdatera</a>
-    <a asp-action="Delete" asp-route-id="@item.Id">Radera</a>
+{   
+    <div class="d-flex">
+    <a asp-action="Edit" asp-route-id="@item.Id" class="update">Uppdatera</a>
+    <a asp-action="Delete" asp-route-id="@item.Id" class="delete">Radera</a>   
+    </div>
+
 }
     
-    <a asp-action="Details" asp-route-id="@item.Id">Visa information</a>
+
     
 </div>
 }
