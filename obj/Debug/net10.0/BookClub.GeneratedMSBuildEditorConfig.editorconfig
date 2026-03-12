@@ -98,16 +98,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Discussion/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Discussion/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Discussion/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlzY3Vzc2lvblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Home/Index.cshtml]
@@ -122,16 +114,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Review/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XERldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Review/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XEVkaXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Review/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV2aWV3XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/emma_/Desktop/Webbutveckling-Program/Läsperiod_7/.net/projekt/BookClub/Views/Shared/AccessDenied.cshtml]

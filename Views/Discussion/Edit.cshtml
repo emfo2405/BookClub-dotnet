@@ -4,9 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 class="text-center m-5">Uppdatera ett inlägg</h1>
 
-<h4>DiscussionModel</h4>
+
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
@@ -39,9 +39,6 @@
     </div>
 </div>
 
-<div class="editBack">
-    <a asp-action="Index">Visa alla inlägg</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

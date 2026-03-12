@@ -34,9 +34,12 @@
     </div>
 </div>
 
+@if(User.IsInRole("Admin")){
 <div class="editBack">
     <a asp-action="Index">Visa alla kapitel</a>
-</div>
+</div>    
+}
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -19,9 +19,6 @@
         <input type="hidden" asp-for="Id" />
         <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
         <input type="submit" value="Radera" class="delete deleteSiteBtn" /> 
-        @if(User.IsInRole("Admin")) {
-        <a asp-action="Index" class="editBack">Visa alla kommentarer</a>            
-        }
 
     </form>
 </div>
