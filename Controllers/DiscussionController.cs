@@ -9,6 +9,7 @@ using BookClub.Data;
 using BookClub.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using System.IO.Compression;
 
 namespace BookClub.Controllers
 {
@@ -61,10 +62,22 @@ namespace BookClub.Controllers
 
     [Authorize]
         // GET: Discussion/Create
-        public IActionResult Create()
+        public IActionResult Create(int chapterId)
         {
             ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number");
+
+            //Håller koll på vilket kapitel som klickades på
+            var chapter = _context.Chapter.FirstOrDefault(c => c.Id == chapterId);
+
+            //Hämtar alla kapitel för boken med id BookModelId
+            var chapters = _context.Chapter
+            .Include(c => c.Book)
+            .Where(c => c.BookModelId == chapter.BookModelId)
+            //Skapar en lista där kapitel visas med nummer och namn för den valda boken
+            .Select(c => new{c.Id, Display = "Kapitel " + c.Number + " - " + c.Title})
+            .ToList();
+            //Skapar en dropdown lista där förvalda är det kapitlet användaren klickade på
+            ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", chapterId);
             return View();
         }
 
