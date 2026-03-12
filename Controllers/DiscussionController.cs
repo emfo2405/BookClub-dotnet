@@ -10,6 +10,7 @@ using BookClub.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.IO.Compression;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace BookClub.Controllers
 {
@@ -74,7 +75,7 @@ namespace BookClub.Controllers
             .Include(c => c.Book)
             .Where(c => c.BookModelId == chapter.BookModelId)
             //Skapar en lista där kapitel visas med nummer och namn för den valda boken
-            .Select(c => new{c.Id, Display = "Kapitel " + c.Number + " - " + c.Title})
+            .Select(c => new{c.Id, Display = "Kapitel " + c.Number + " - " + c.Book.Title})
             .ToList();
             //Skapar en dropdown lista där förvalda är det kapitlet användaren klickade på
             ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", chapterId);
@@ -89,6 +90,8 @@ namespace BookClub.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel, string returnUrl)
         {
+            
+
             if (ModelState.IsValid)
             {
                 _context.Add(discussionModel);
@@ -96,6 +99,8 @@ namespace BookClub.Controllers
 
                 //Add logged in User
                 discussionModel.UserName = User.Identity?.Name ?? "Unknown";
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                discussionModel.UserId = userId;
 
                 await _context.SaveChangesAsync();
 
@@ -145,7 +150,7 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, string returnUrl, [Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel)
+        public async Task<IActionResult> Edit(int id, string returnUrl, [Bind("Id,Title,Content,CreatedAt,ChapterModelId, UserId, UserName")] DiscussionModel discussionModel)
         {
             if (id != discussionModel.Id)
             {
