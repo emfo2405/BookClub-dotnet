@@ -405,6 +405,7 @@ justify-content: center;
 .updateText {
   background-color: #e6cbb9;
   color: black;
+  margin-right: 10px;
 }
 
 .updateText:hover {
@@ -414,6 +415,17 @@ justify-content: center;
 .deleteText:hover {
   background-color: #bd7e7e;;
 }
+
+.chapterTable table {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chapterTable th, .chapterTable td {
+  padding: 20px;
+}
+
 
 
 

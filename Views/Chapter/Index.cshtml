@@ -21,20 +21,21 @@
             <th>
                 Bok
             </th>
-            <th></th>
+            <th>
+            </th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderBy(c => c.Book.Title)) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Title)
+                @item.Title
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Number)
+                @item.Number
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Book.Title)
+                @item.Book.Title
             </td>
             <td>
             @if (User.IsInRole("Admin")) {
