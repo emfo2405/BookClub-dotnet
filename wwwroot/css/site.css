@@ -92,7 +92,7 @@ a {
   background-color: #e6c07b;;
 }
 
-.showInfo, .takePart{
+.showInfo, .takePartDiscussion, .takePartReview{
   text-decoration: none;
   border: 2px solid #b6baa1;
   background-color: rgb(248, 244, 210);
@@ -104,13 +104,31 @@ a {
   padding: 5px;
 }
 
-.showInfo:hover, .takePart:hover {
+.showInfo:hover {
   background-color: #b6baa1;
 }
 
-.takePart {
+.takePartDiscussion, .takePartReview {
   width: 190px;
   padding: 7px;
+}
+
+.takePartDiscussion {
+  background-color: #fcfbe3;
+  border: 2px solid #e2dc9a;
+}
+
+.takePartDiscussion:hover {
+  background-color: #f8f4d2;
+}
+
+.takePartReview {
+  background-color: #dce0c7;
+  border: 2px solid #9aa07a
+}
+
+.takePartReview:hover {
+  background-color: #b6baa1
 }
 
 .updateOneBook, .showInfoOneBook {
@@ -200,10 +218,6 @@ h4, h5, h6, p {
   border-radius: 20px;;
 }
 
-.bookDetails img{
-  width: 300px;
-}
-
 .oneComment {
   background-color: #fcfbe3;
   padding: 20px;
@@ -231,4 +245,30 @@ cursor: pointer;
   text-align: center;
   margin: 0 auto;
   display: block;
+}
+
+.oneReview {
+  margin: 20px;
+  padding: 20px;
+  background-color: #dce0c7;
+  border-radius: 10px;
+}
+
+.reviewBlock {
+  background-color: #b6baa1;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin-bottom: 50px;
+}
+
+.oneBookImg {
+  background-color: #f8f4d2;
+  padding: 50px;
+  padding-top: 10px;
+  padding-bottom: 80px;
+
+}
+
+.oneBookImg Img {
+  width: 200px;
 }
