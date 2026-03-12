@@ -65,10 +65,10 @@ namespace BookClub.Controllers
 
     [Authorize]
         // GET: Review/Create
-        public IActionResult Create()
+        public IActionResult Create(int bookId)
         {
             ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
-            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title");
+            ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", bookId);
             return View();
         }
 

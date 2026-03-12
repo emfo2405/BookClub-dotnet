@@ -66,7 +66,7 @@ namespace BookClub.Controllers
         {
             ViewData["ReturnUrl"] = Request.Headers["Referer"].ToString();
 
-            //Håller koll på vilket kapitel som klickades på
+            //Håller koll på vilket kapitel som klickades på och hämtar det
             var chapter = _context.Chapter.FirstOrDefault(c => c.Id == chapterId);
 
             //Hämtar alla kapitel för boken med id BookModelId
