@@ -330,3 +330,38 @@ border: 2px solid #f0df94;
   padding: 5px;
   text-align: center;
 }
+
+.authorDescription {
+  width: 450px;
+  display: block;
+  margin: 0 auto;
+}
+
+.showAuthorInfo {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  background-color: transparent;
+}
+
+.authorBlock {
+  background-color: #f8f4d2;
+  padding-bottom: 40px;
+  margin-bottom: 50px;
+}
+
+.authorBlock img {
+  width: 200px;
+  margin: 0 auto;
+}
+
+#personImg {
+  font-size: 180px;
+  text-align: center;
+}
+
+#authorDescription {
+  background-color: #fcfbe3;
+  padding: 20px;
+  border-radius: 10px;;
+}
