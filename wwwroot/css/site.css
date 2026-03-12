@@ -307,7 +307,19 @@ border: 2px solid #f0df94;
 .editBack {
   display: block;
   margin: 0 auto;
-  width: 120px;
+  width: 110px;
   margin-top: 40px;
   margin-bottom: 50px;
+}
+
+.deleteSite img {
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.deleteSiteBtn {
+  display: block;
+  margin: 0 auto;
+  background-color: transparent;
 }
