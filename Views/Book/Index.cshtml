@@ -4,15 +4,9 @@
     ViewData["Title"] = "Våra böcker";
 }
 
-<h1 class="text-center m-5">Våra böcker</h1>
+<h1 class="text-center m-5 display-3">-- Våra böcker --</h1>
 
-<p class="text-center p-2">
-    @if (User.IsInRole("Admin"))
-    {
-        <a asp-action="Create" class="showBooksBtn">Lägg till en ny bok</a>
-    }
-    
-</p>
+
 
 <div class="bookList mt-5">
 @foreach (var item in Model) {
@@ -23,7 +17,7 @@
     <p> ⭐ @(item.AverageRating?.ToString("0.0")
         ?? "-")
     </p>
-    <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#description-@item.Id">Visa beskrivning ⏷</a> 
+    <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#description-@item.Id">Visa beskrivning <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></a> 
     <div class="collapse descriptionView" id="description-@item.Id">
     <p class="text-start p-4">@Html.DisplayFor(modelItem => item.Description)</p>        
     </div>
@@ -45,3 +39,11 @@
 </div>
 }
 </div>
+
+<p class="text-center p-2">
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" class="showBooksBtn">Lägg till en ny bok</a>
+    }
+    
+</p>

@@ -4,10 +4,19 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-center mt-5">@Html.DisplayFor(model => model.Title)</h1> 
+<h2 class="text-center mb-4">@Html.DisplayFor(model => model.Author.Name)</h2> 
 
-<div class="w-75 d-block mx-auto">
-    <h4 class="text-center">@Html.DisplayFor(model => model.Title) <br /> @Html.DisplayFor(model => model.Author.Name)</h4>
+<div class="d-block mx-auto text-center mb-4">
+                @if (ViewData["AverageRating"] != null)
+            {
+                <p>@string.Format("⭐ 0.0", ViewData["AverageRating"])</p>
+            } else {
+                <p>⭐ Inte betygsatt ännu</p>
+            }    
+</div>
+
+<div class="w-75 d-block mx-auto bookDetails">
     <img class="d-block mx-auto" src="@Model.Image" />
     <hr />
     <dl class="row ">
@@ -29,61 +38,67 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Author.Country)
         </dd>
+                <dt class = "col-sm-2">
+            Författare
+        </dt>
+        <dd class = "col-sm-10">
+            <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.Author.Id" class="mt-2">@Model.Author.Name</a>
+        </dd>
 
     </dl>
 </div>
 
-<div class="w-25 d-block mx-auto mt-5">
-                @if (ViewData["AverageRating"] != null)
-            {
-                <p>@string.Format("{0:0.0} / 10", ViewData["AverageRating"])</p>
-            } else {
-                <p>Inget betyg gett ännu</p>
-            }    
-</div>
 
 
-<div class="w-50 d-block mx-auto">
+
+<div class="d-flex oneBookButtons">
     @if (User.IsInRole("Admin"))
 {
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Redigera information</a> 
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="update updateOneBook">Redigera information</a> 
 }
 
 
 
-<a asp-action="Index">Visa alla böcker</a>
+<a asp-action="Index" class="showInfo showInfoOneBook">Visa alla böcker</a>
 
 </div>
 
 
 
 
-<div class="mt-5 w-75 mx-auto">
-    <h2 class="mb-5">Diskussionsforum för varje kapitel:</h2>
+<div class="mt-5 d-block mx-auto">
+    <h2 class="mb-5 text-center">Diskussionsforum för varje kapitel:</h2>
 
 
     @foreach (ChapterModel chapter in Model.Chapters.OrderBy(c => c.Number))
     {
-        <h4>Kapitel @chapter.Number - @chapter.Title</h4>
+        <div class="d-block mx-auto w-75">
+        <h4 class="text-center" data-bs-toggle="collapse" data-bs-target="#review-@chapter.Id">Kapitel @chapter.Number - @chapter.Title <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></h4>
 
 @if (chapter.Discussions != null && chapter.Discussions.Any())
 {
+<div class="collapse reviewView" id="review-@chapter.Id">    
             @foreach (var discussion in chapter.Discussions.OrderBy(d => d.CreatedAt))
         {
-            <p>@discussion.UserName</p>
-            <p>@discussion.CreatedAt</p>
-
+            <div class="oneComment">
+            @if (User.Identity.Name == discussion.UserName) {
+            <div class="discussionButtons d-flex">
+            <a asp-controller="Discussion" asp-action="Edit" asp-route-id="@discussion.Id" class="update updateDiscussion"><span class="material-symbols-outlined align-middle">edit</span></a>
+            <a asp-controller="Discussion" asp-action="Delete" asp-route-id="@discussion.Id" class="delete deleteDiscussion"><span class="material-symbols-outlined align-middle">delete</span></a>
+            </div>
+    }
             <h5>@discussion.Title</h5>
             <p>@discussion.Content</p>
+            <p class="text-muted">@discussion.UserName - @discussion.CreatedAt</p>
+            </div>
 
-                @if (User.Identity.Name == discussion.UserName) {
-        <a asp-controller="Discussion" asp-action="Edit" asp-route-id="@discussion.Id">Uppdatera</a>
-        <a asp-controller="Discussion" asp-action="Delete" asp-route-id="@discussion.Id">Radera</a>
-    }
+
         }
+</div>
 } else {
     <p>Inga diskussionsinlägg finns</p>
 }
+</div>
 
 @if (User.Identity.IsAuthenticated)
 {

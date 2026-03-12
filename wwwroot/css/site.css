@@ -108,6 +108,36 @@ a {
   background-color: #b6baa1;
 }
 
+.updateOneBook, .showInfoOneBook {
+  width: 190px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+.updateDiscussion, .deleteDiscussion {
+  width: 40px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 0 auto;
+  background-color: transparent; 
+}
+
+.oneBookButtons {
+  width: 400px;
+display: block;
+margin: 0 auto;
+margin-top: 50px;
+}
+
+.discussionButtons {
+  width: 100px;
+  display: flex;
+  margin-left: auto;
+}
+
+
+
 .showBooksBtn {
   text-align: center;
   padding: 10px;
@@ -128,6 +158,7 @@ a {
 .bookDisplayImg {
   width: 200px;
 }
+
 
 .bookList {
   display: grid;
@@ -162,4 +193,15 @@ h4, h5, h6, p {
 .descriptionView {
   background-color: #fcfbe3;
   border-radius: 20px;;
+}
+
+.bookDetails img{
+  width: 300px;
+}
+
+.oneComment {
+  background-color: #f8f4d2;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
 }
