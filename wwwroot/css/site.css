@@ -168,14 +168,14 @@ margin-top: 50px;
   width: 150px;
   margin: 0 auto;
   border-radius: 20px;
-  background-color: #b6baa1;
+  background-color: #d7dbc1;
   margin-bottom: 20px;
   color: black;
   text-decoration: none;
 }
 
 .showBooksBtn:hover {
-  background-color: #e0e4cf;
+  background-color: #c2c7ad;
 }
 
 .bookDisplayImg {
@@ -216,6 +216,12 @@ h4, h5, h6, p {
 .descriptionView {
   background-color: #fcfbe3;
   border-radius: 20px;;
+}
+
+.descriptionViewIndex {
+    background-color: #fcfbe3;
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .oneComment {
@@ -360,10 +366,30 @@ border: 2px solid #f0df94;
   text-align: center;
 }
 
+#personImgIndex {
+    font-size: 100px;
+  text-align: center;
+}
+
 #authorDescription {
   background-color: #fcfbe3;
   padding: 20px;
   border-radius: 10px;;
 }
+
+.authorProfile {
+  background-color: #f8f4d2;
+  width: 500px;
+  padding: 20px;
+  margin: 30px;
+}
+
+.allAuthors {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+
 
 
