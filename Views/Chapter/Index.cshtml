@@ -4,25 +4,22 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center m-5">Alla kapitel</h1>
 
-<p>
-    @if(User.IsInRole("Admin")) {
-    <a asp-action="Create">Create New</a>        
-    }
+<div class="chapterTable m-5">
 
-</p>
-<table class="table">
+
+<table class="table table-striped table-warning">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Titel
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Number)
+                Nummer
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Book)
+                Bok
             </th>
             <th></th>
         </tr>
@@ -42,9 +39,8 @@
             <td>
             @if (User.IsInRole("Admin")) {
                 <div>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>                     
+                <a asp-action="Edit" asp-route-id="@item.Id" class="updateText">Uppdatera</a> 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="deleteText">Radera</a>                     
                 </div>
                
             }
@@ -54,3 +50,10 @@
 }
     </tbody>
 </table>
+</div>
+<p>
+    @if(User.IsInRole("Admin")) {
+    <a asp-action="Create" class="showBooksBtn mx-auto d-block mt-4 mb-5">Skapa ett nytt kapitel</a>        
+    }
+
+</p>

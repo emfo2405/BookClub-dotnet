@@ -390,6 +390,30 @@ flex-wrap: wrap;
 justify-content: center;
 }
 
+.updateText, .deleteText {
+  text-decoration: none;
+  border: 1px solid rgb(95, 93, 93);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.deleteText {
+  background-color: #d3a5a5;
+  color: black;
+}
+
+.updateText {
+  background-color: #e6cbb9;
+  color: black;
+}
+
+.updateText:hover {
+  background-color: #c48c67;
+}
+
+.deleteText:hover {
+  background-color: #bd7e7e;;
+}
 
 
 
