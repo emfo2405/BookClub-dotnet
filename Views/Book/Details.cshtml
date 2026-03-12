@@ -72,12 +72,12 @@
 
     @foreach (ChapterModel chapter in Model.Chapters.OrderBy(c => c.Number))
     {
-        <div class="d-block mx-auto w-75">
+        <div class="d-block mx-auto w-75 chapterBlock">
         <h4 class="text-center" data-bs-toggle="collapse" data-bs-target="#review-@chapter.Id">Kapitel @chapter.Number - @chapter.Title <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></h4>
-
+<div class="collapse reviewView" id="review-@chapter.Id">  
 @if (chapter.Discussions != null && chapter.Discussions.Any())
 {
-<div class="collapse reviewView" id="review-@chapter.Id">    
+  
             @foreach (var discussion in chapter.Discussions.OrderBy(d => d.CreatedAt))
         {
             <div class="oneComment">
@@ -94,17 +94,23 @@
 
 
         }
-</div>
+ 
 } else {
     <p>Inga diskussionsinlägg finns</p>
+  
+   
 }
-</div>
 
+
+ 
 @if (User.Identity.IsAuthenticated)
 {
-    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id">Lämna en kommentar</a>
+    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id" class="takePart">Delta i diskussionen</a>
 }
+</div>
+</div> 
 }
+
 <h2 class="mb-5 mt-5">Betyg för boken</h2>
 
 @foreach (var review in Model.Reviews.OrderBy(r => r.Id))
