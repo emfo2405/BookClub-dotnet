@@ -48,7 +48,7 @@ a {
 }
 
 .topBooksImg {
-  width: 170px;
+  width: 220px;
 }
 
 .oneTopBook {
@@ -237,6 +237,8 @@ h4, h5, h6, p {
   margin: 20px;
   border-radius: 20px;
   padding-bottom: 20px;
+   max-width: 700px;
+   width: 80%;
 }
 
 .chapterBlock h4{
@@ -267,6 +269,8 @@ cursor: pointer;
   padding-bottom: 30px;
   margin-bottom: 50px;
    border-radius: 20px;
+   max-width: 700px;
+   width: 80%;
 }
 
 .oneBookImg {
@@ -340,8 +344,14 @@ border: 2px solid #f0df94;
 }
 
 .authorDescription {
-  width: 450px;
+  max-width: 550px;
+  width: 90%;
   display: block;
+  margin: 0 auto;
+}
+
+.authorDetails {
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -445,6 +455,32 @@ nav li {
 nav li:hover {
   background-color: #d9ddc4;
   border-radius: 10px;
+}
+
+.bookDetails {
+  width: 75%;
+}
+
+.aiResponse {
+  max-width: 400px;
+}
+
+/*Anpassningar till olika skärmstorlekar*/
+@media (max-width: 800px) {
+  .bookList {
+  grid-template-columns: repeat(1, 1fr);
+}
+}
+
+@media(min-width:1200px) {
+  .bookList {
+    width: 1100px;
+    margin: 0 auto;
+  }
+
+  .bookDetails {
+    width: 700px;
+  }
 }
 
 

@@ -3,10 +3,10 @@
 }
 @model BookClub.Models.HomeModel
 
-<div class="Intro row">
-    <div class="IntroText col-12 col-sm-7 p-5">
+<div class="Intro row d-flex justify-content-center flex-sm-column flex-md-row">
+    <div class="IntroText col-12 col-sm-8 p-5 col-sm-12 col-lg-5 col-xxl-5">
        <h1 class="text-center">Bokhörnan</h1> 
-       <p>Välkommen till vår bokklubb! Här väljer vi varje månad ut en ny
+       <p class="w-75 w-md-100 mx-auto">Välkommen till vår bokklubb! Här väljer vi varje månad ut en ny
         bok som vi läser tillsammans och kan diskutera under månadens gång. 
         Vi har diskussionsforum uppdelade i kapitel så att man kan undvika spoilers 
         och det finns även en möjlighet att lämna en recension när man är klar med boken.
@@ -15,21 +15,21 @@
         för dem. Hoppas du hittar något du vill läsa och blir en del av vår lilla bokklubb!
        </p>
     </div>
-    <div class="col-12 col-sm-5">
-      <img class="introImg" src="/bookshop.jpg" />  
+    <div class="col-12 col-sm-12 col-lg-7 col-xxl-7">
+      <img class="introImg w-100" src="/bookshop2.jpg" />  
     </div>
     
 </div>
 
 <div class="text-center bookOfMonth p-4">
     <h2>Just nu läser vi</h2>
-    <div class="monthContent row p-5">
+    <div class="monthContent w-lg-50 row p-5 d-flex justify-content-center flex-sm-column flex-md-row">
     @if (Model.CurrentBook != null)
     {
-        <div class="col-sm-4">
+        <div class="col-sm-12 col-md-6 col-lg-4 col-xxl-3">
              <img class="currentBookImg" src="@Model.CurrentBook.Image" />
         </div>
-       <div class="col-sm-8 my-auto">
+       <div class="col-sm-12 mt-5 col-xxl-4 col-md-6 col-lg-6 my-auto">
         <h3>@Model.CurrentBook.Title - @Model.CurrentBook.Author?.Name</h3>
         <p>@Model.CurrentBook.ShortDescription</p>
         <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.CurrentBook.Id">Gå till bokens sida</a>
@@ -40,8 +40,8 @@
 
 <div class="questions p-3">
     <h2 class="text-center mb-5 mt-3">Hur det fungerar</h2>
-<div class="questionList">
-    <div class=" m-2 p-3 oneQuestion">
+<div class="questionList justify-content-center d-flex flex-column flex-lg-row col-md-12">
+    <div class=" m-2 p-3 oneQuestion col-lg-4 col-md-8 mx-auto">
     <h3 class="text-center">Vilka böcker väljs?</h3>
     <p>I vår bokklubb turas vi om att välja böcker varje månad. 
         Detta innebär att vi får läsa böcker i flera olika genrer av 
@@ -50,13 +50,21 @@
         från den här delade upplevelsen.
     </p>
 </div>
-<div class="m-2 p-3 oneQuestion">
+<div class="m-2 p-3 oneQuestion col-lg-3 col-md-8 mx-auto">
     <h3 class="text-center">Hur lång tid läggs på varje bok?</h3>
-    <p></p>
+    <p>Normalt sett läser vi en bok i månaden. Men alla får 
+        självklart läsa i sin egen takt och diskussionsforum och 
+        möjlighet att lämna en recension är öppet hela tiden boken 
+        ligger på hemsidan.
+    </p>
 </div>
-<div class="m-2 p-3 oneQuestion">
+<div class="m-2 p-3 oneQuestion col-lg-4 col-md-8 mx-auto">
     <h3 class="text-center">Hur går jag med?</h3>
-    <p></p>
+    <p>För att gå med behöver du bara skapa ett gratis konto. Därefter
+        kan du delta i diskussionsforum och lämna betyg. Om du inte 
+        vill skapa ett konto kan du ändå se månadens bok och ta del 
+        av diskussioner och betyg lämnade av andra användare.
+    </p>
 </div>
 </div>
 </div>
@@ -65,7 +73,7 @@
 
 <h2 class="text-center p-5">Böckerna vi har gillat mest</h2>
 
-  <div class="topBooks"> 
+  <div class="topBooks d-flex justify-content-center flex-column flex-md-row col-4 mx-auto"> 
 @foreach (var book in Model.TopRated)
 {
  
@@ -73,7 +81,7 @@ var average = book.Reviews.Any()
 ? book.Reviews.Average(r => r.Review)
 : 0;
 
-    <div class="oneTopBook">
+    <div class="oneTopBook mx-auto">
     <img class="topBooksImg" src="@book.Image" />
     <h4>@book.Title</h4>
     <p>⭐ @average?.ToString("0.0")</p>
@@ -81,4 +89,4 @@ var average = book.Reviews.Any()
 }
 </div>
 
-<a class="nav-link text-dark showBooksBtn" asp-area="" asp-controller="Book" asp-action="Index">Visa alla böcker</a>
+<a class="nav-link text-dark showBooksBtn mb-5" asp-area="" asp-controller="Book" asp-action="Index">Visa alla böcker</a>

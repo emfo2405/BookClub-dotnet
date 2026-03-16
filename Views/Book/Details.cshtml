@@ -21,30 +21,30 @@
     <img class="d-block mx-auto" src="@Model.Image" />        
     </div>
 
-<div class="w-75 d-block mx-auto bookDetails mt-5">
+<div class=" d-block mx-auto bookDetails mt-5">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-12 col-md-2">
             År
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-12 col-md-10">
             @Html.DisplayFor(model => model.Year)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-12 col-md-2">
             Beskrivning
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-12 col-md-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-12 col-md-2">
             Land
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-12 col-md-10">
             @Html.DisplayFor(model => model.Author.Country)
         </dd>
-                <dt class = "col-sm-2">
+                <dt class = "col-sm-12 col-md-2">
             Författare
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-12 col-md-10">
             <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.Author.Id" class="mt-2">@Model.Author.Name</a>
         </dd>
 
@@ -75,7 +75,7 @@
 
     @foreach (ChapterModel chapter in Model.Chapters.OrderBy(c => c.Number))
     {
-        <div class="d-block mx-auto w-75 chapterBlock">
+        <div class="d-block mx-auto chapterBlock">
         <h4 class="text-center" data-bs-toggle="collapse" data-bs-target="#review-@chapter.Id">Kapitel @chapter.Number - @chapter.Title <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></h4>
 <div class="collapse reviewView" id="review-@chapter.Id">  
      
@@ -116,7 +116,7 @@
 }
 
 <h2 class="mb-5 mt-5 text-center">Betyg för boken</h2>
-<div class="d-block mx-auto w-75 reviewBlock">
+<div class="d-block mx-auto reviewBlock">
 @foreach (var review in Model.Reviews.OrderBy(r => r.Id))
 {
     <div class="oneReview">
