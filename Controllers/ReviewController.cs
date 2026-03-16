@@ -107,7 +107,7 @@ namespace BookClub.Controllers
             {
                 return Redirect(returnUrl);
             }
-                return RedirectToAction(nameof(Index));                    
+                return RedirectToAction("Index", "Book");                    
                 
 
             }
@@ -182,7 +182,7 @@ namespace BookClub.Controllers
                 return Redirect(returnUrl);
             }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Book"); 
             }
             ViewData["BookModelId"] = new SelectList(_context.Book, "Id", "Title", reviewModel.BookModelId);
             return View(reviewModel);
@@ -251,7 +251,7 @@ namespace BookClub.Controllers
             }
 
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Book"); 
         }
 
         private bool ReviewModelExists(int id)

@@ -78,6 +78,11 @@
         <div class="d-block mx-auto w-75 chapterBlock">
         <h4 class="text-center" data-bs-toggle="collapse" data-bs-target="#review-@chapter.Id">Kapitel @chapter.Number - @chapter.Title <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></h4>
 <div class="collapse reviewView" id="review-@chapter.Id">  
+     
+@if (User.Identity.IsAuthenticated)
+{
+    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id" class="takePartDiscussion mb-3">Delta i diskussionen</a>
+}
 @if (chapter.Discussions != null && chapter.Discussions.Any())
 {
   
@@ -105,11 +110,7 @@
 }
 
 
- 
-@if (User.Identity.IsAuthenticated)
-{
-    <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id" class="takePartDiscussion">Delta i diskussionen</a>
-}
+
 </div>
 </div> 
 }

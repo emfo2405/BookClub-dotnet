@@ -13,6 +13,7 @@ using System.IO.Compression;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using OpenAI.Chat;
 using System.Diagnostics;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 
 namespace BookClub.Controllers
 {
@@ -230,7 +231,7 @@ namespace BookClub.Controllers
             {
                 return Redirect(returnUrl);
             }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Book");
             }
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
@@ -292,7 +293,7 @@ namespace BookClub.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Book");
         }
 
         private bool DiscussionModelExists(int id)
@@ -305,5 +306,6 @@ namespace BookClub.Controllers
 
             return _context.Discussion.Any(e => e.Id == id);
         }
-    }
+   
 }
+ }
