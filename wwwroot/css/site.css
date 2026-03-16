@@ -465,6 +465,15 @@ nav li:hover {
   max-width: 400px;
 }
 
+.navbar-brand {
+  width: 70px;
+
+  img {
+    width: 55px;
+    margin-left: 15px;
+  }
+}
+
 /*Anpassningar till olika skärmstorlekar*/
 @media (max-width: 800px) {
   .bookList {
