@@ -34,6 +34,25 @@
 </div>
 
 
+    @{
+      if(ViewBag.responseMessage != null) {
+<div class="w-50 mx-auto mt-4 border border-info bg-info bg-opacity-10 p-4">        
+        <p class="fw-bold">@ViewBag.ResponseMessage</p>
+        <p>@ViewBag.Motivation</p>
+</div>        
+      }  
+    }
+    
+
+
+<div class="d-flex">
+    @if(!string.IsNullOrEmpty(ViewData["ReturnUrl"]?.ToString())) {
+        <a class="editBack mx-auto addBookBtn" href="@ViewData["ReturnUrl"]">Visa föregående sida</a>
+    }
+        <a class="editBack mx-auto addBookBtn" asp-area="" asp-controller="Book" asp-action="Index">Visa alla böcker</a>
+</div>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

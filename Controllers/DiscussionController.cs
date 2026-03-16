@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.IO.Compression;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using OpenAI.Chat;
+using System.Diagnostics;
 
 namespace BookClub.Controllers
 {
@@ -27,7 +28,7 @@ namespace BookClub.Controllers
             _context = context;
 
             var openAIKey = configuration["OpenAI:ApiKey"];
-            var modelName = configuration["model"];
+            var modelName = configuration["OpenAI:Model"];
 
             _chatClient = new ChatClient(modelName, openAIKey);            
         }
@@ -104,15 +105,13 @@ namespace BookClub.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(discussionModel);
 
-
-                //Add logged in User
+              //Add logged in User
                 discussionModel.UserName = User.Identity?.Name ?? "Unknown";
                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 discussionModel.UserId = userId;
 
-                await _context.SaveChangesAsync();
+
 
             //Lägg till promt till AI
             try
@@ -124,19 +123,41 @@ namespace BookClub.Controllers
                     Svara i ren , korrekt JSON utan markdown i följande format:
                     {
                     IsAllowed: true/false,
-                    Reason: text
+                    Motivation: text
                     }
                     där du förklarar och motiverar din bedömning.
                     Användarinnehåll: ''" + discussionModel.Content + @"''";
+
+                    var response = await _chatClient.CompleteChatAsync(moderationPromt);
+                    var aiResponse = response.Value.Content[0].Text;
+
+                    var moderationResult = System.Text.Json.JsonSerializer.Deserialize<Moderation>(aiResponse);
+
+                    if(moderationResult == null)
+                    {
+                    ViewBag.ResponseMessage = "Kunde inte tolka svaret...";
+                    return View(discussionModel);
+                    }
+
+                    if(moderationResult.IsAllowed)
+                    {
+                        _context.Add(discussionModel);
+                        await _context.SaveChangesAsync();
+                    ViewBag.ResponseMessage = "Inlägget är godkänt för publicering"; 
+                    ViewBag.Motivation = moderationResult.Motivation;
+                        return View(discussionModel);
+                    }
+
+                    ViewBag.ResponseMessage = "Inlägget är inte tillåtet"; 
+                    ViewBag.Motivation = moderationResult.Motivation;
+                    return View(discussionModel);
+                } catch (Exception ex)
+                {
+                 Console.WriteLine("Error " + ex);
+                return View(discussionModel);
                 }
                     
-                }
-
-            if (!string.IsNullOrEmpty(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-                return RedirectToAction(nameof(Index));
+                
             }
             ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
             return View(discussionModel);
