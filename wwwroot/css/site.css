@@ -234,8 +234,9 @@ h4, h5, h6, p {
 
 .chapterBlock {
   background-color: #f8f4d2;
-  padding: 20px;
   margin: 20px;
+  border-radius: 20px;
+  padding-bottom: 20px;
 }
 
 .chapterBlock h4{
@@ -265,6 +266,7 @@ cursor: pointer;
   padding-top: 20px;
   padding-bottom: 30px;
   margin-bottom: 50px;
+   border-radius: 20px;
 }
 
 .oneBookImg {
@@ -434,6 +436,15 @@ justify-content: center;
 footer {
   background-color: #f8f4d2;
   padding: 10px;
+}
+
+nav li {
+  margin-right: 10px;
+}
+
+nav li:hover {
+  background-color: #d9ddc4;
+  border-radius: 10px;
 }
 
 

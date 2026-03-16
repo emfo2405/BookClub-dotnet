@@ -8,9 +8,9 @@
 <h2 class="text-center mb-4">@Html.DisplayFor(model => model.Author.Name)</h2> 
 
 <div class="d-block mx-auto text-center mb-4">
-                @if (ViewData["AverageRating"] != null)
+                @if (@Model.AverageRating != null)
             {
-                <p>@string.Format("⭐ 0.0", ViewData["AverageRating"])</p>
+                <p>⭐ @Model.AverageRating?.ToString("0.0")</p>
             } else {
                 <p>⭐ Inte betygsatt ännu</p>
             }    
