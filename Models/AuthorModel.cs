@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BookClub.Models
 {
+    //Modell för hur en författare ska struktureras
+    //Required-fält måste fyllas i
     public class AuthorModel
     {
         //Properties

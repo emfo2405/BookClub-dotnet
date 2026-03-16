@@ -10,6 +10,7 @@
 
 
 <table class="table table-striped table-warning">
+<!--Tabell för att visa alla kapitel-->
     <thead>
         <tr>
             <th>
@@ -27,6 +28,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model.OrderBy(c => c.Book.Title)) {
+<!--För varje kapitel skapas en rad där titel, nummer och boktitel fylls i-->
         <tr>
             <td>
                 @item.Title
@@ -40,6 +42,7 @@
             <td>
             @if (User.IsInRole("Admin")) {
                 <div>
+                <!--Om en användare är inloggad som admin syns knappar för att uppdatera eller radera-->
                 <a asp-action="Edit" asp-route-id="@item.Id" class="updateText">Uppdatera</a> 
                 <a asp-action="Delete" asp-route-id="@item.Id" class="deleteText">Radera</a>                     
                 </div>
@@ -54,6 +57,7 @@
 </div>
 <p>
     @if(User.IsInRole("Admin")) {
+    <!--Om användaren är inloggad som admin visas en knapp för att skapa ett nytt kapitel-->
     <a asp-action="Create" class="showBooksBtn mx-auto d-block mt-4 mb-5">Skapa ett nytt kapitel</a>        
     }
 

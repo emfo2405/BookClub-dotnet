@@ -1,23 +1,27 @@
 @model IEnumerable<BookClub.Models.AuthorModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Våra författare";
 }
 
 <h1 class="text-center m-5">Våra författare</h1>
 
 <div class="allAuthors">
+<!--Struktur för hur författare ska visas på index-sidan-->
 @foreach (var item in Model.OrderBy(a => a.Name) ) {
     <div class="authorProfile">
     <span class="material-symbols-outlined w-100" id="personImgIndex">article_person</span>
         <h4 class="text-center">@item.Name</h4>
         <h5 class="text-center">@item.Country</h5>
+        <!--Knapp för att visa mer information om en författare vid klick-->
         <div>
             <button class="showAuthorInfo" data-bs-toggle="collapse" data-bs-target="#description-@item.Id">Visa beskrivning <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></button>
             <p class="collapse descriptionViewIndex" id="description-@item.Id">@item.Description</p>
         </div>
+                <!--Länk till författarsidan-->
                 <a asp-action="Details" asp-route-id="@item.Id" class="mt-2 showInfo text-center">Visa författare</a> 
 
+                <!--Om användaren är inloggad som Admin visas en uppdatera- och en radera-knapp-->
                 @if(User.IsInRole("Admin")) {
                 <div class="d-flex mt-4 text-center">
                 <a asp-action="Edit" asp-route-id="@item.Id" class="update">Uppdatera</a> 
@@ -29,6 +33,7 @@
 }
 </div>
 <p>
+    <!--Om användaren är inloggad som admin visas en länk till att skapa en ny författare-->
     @if(User.IsInRole("Admin")) {
     <a asp-action="Create" class="showBooksBtn mx-auto d-block mt-4 mb-5">Lägg till en författare</a>        
     }

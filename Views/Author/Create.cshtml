@@ -1,13 +1,14 @@
 @model BookClub.Models.AuthorModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Skapa författare";
 }
 
 <h1 class="text-center m-5">Skapa en författarprofil</h1>
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
+    <!--Formulär för att skapa en ny författare med namn, beskrivning och land-->
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -33,6 +34,7 @@
 </div>
 
 <div class="editBack">
+<!--Knapp för att komma till listan med alla författare-->
     <a asp-action="Index">Visa alla författare</a>
 </div>
 

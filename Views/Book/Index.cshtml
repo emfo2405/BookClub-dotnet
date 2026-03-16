@@ -10,23 +10,27 @@
 
 <div class="bookList mt-5">
 @foreach (var item in Model) {
+<!--Varje bok i databasen skrivs ut enligt följande struktur med Titel, år, bild, betyg, författare och beskrivning-->
     <div class="mb-5 mt-3 oneBook">
     <img class="bookDisplayImg" src="@item.Image" />
     <h3>@Html.DisplayFor(modelItem => item.Title) <br /> @Html.DisplayFor(modelItem => item.Author.Name)</h3>
     <h4>@Html.DisplayFor(modelItem => item.Year)</h4>
+<!--Medelbetyg för boken skrivs ut-->
     <p> ⭐ @(item.AverageRating?.ToString("0.0")
         ?? "-")
     </p>
+<!--Knapp för att kunna visa beskrivningen för en bok-->
     <a class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#description-@item.Id">Visa beskrivning <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></a> 
     <div class="collapse descriptionView" id="description-@item.Id">
     <p class="text-start p-4">@Html.DisplayFor(modelItem => item.Description)</p>        
     </div>
     <br />
-
+<!--Knapp för att kunna komma till bokens sida-->
     <a asp-action="Details" asp-route-id="@item.Id" class="mt-2 showInfo">Gå till bokens sida</a>  <br />  
 
 @if (User.IsInRole("Admin"))
 {   
+<!--Om den inloggade användaren har rollen admin syns knappar för att uppdatera eller radera en bok-->
     <div class="d-flex">
     <a asp-action="Edit" asp-route-id="@item.Id" class="update">Uppdatera</a>
     <a asp-action="Delete" asp-route-id="@item.Id" class="delete">Radera</a>   
@@ -43,6 +47,7 @@
 <p class="text-center p-2 mb-5 mt-3">
     @if (User.IsInRole("Admin"))
     {
+<!--Om den inloggade användaren har rollen admin syns en knapp för att kunna lägga till en bok-->
         <a asp-action="Create" class="showBooksBtn mb-5">Lägg till en ny bok</a>
     }
     

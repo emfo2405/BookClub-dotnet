@@ -18,7 +18,7 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        //Visa senaste bok och senaste kommentar
+        //Visa senaste bok och inkludera relationer, sorteras på id
         var currentBook = await _context.Book
             .Include(b => b.Author)
             .Include(d => d.Chapters)
@@ -27,14 +27,14 @@ public class HomeController : Controller
             .OrderByDescending(b => b.Id)
             .FirstOrDefaultAsync();
 
-
+        //Ta ut senaste kommentar från den senaste boken, sorteras på id
         var latestComment = currentBook?.Chapters
         .SelectMany(c => c.Discussions)
         .OrderByDescending(d => d.Id)
         .FirstOrDefault();
 
 
-    //Visa högst betygsatta böcker
+    //Visa högst betygsatta böcker och inkludera relationer, sorteras efter högst medelvärde av betyg och visar tre böcker
     var topRated = await _context.Book
         .Include(b => b.Author)
         .Include(b => b.Reviews)
@@ -43,6 +43,7 @@ public class HomeController : Controller
         .Take(3)
         .ToListAsync();
 
+        //Skapar en modell för att kunna visa data på hemskärmen
         var showView = new HomeModel
         {
             CurrentBook = currentBook,
@@ -50,12 +51,14 @@ public class HomeController : Controller
             LatestComment = latestComment
         };
 
+            //Skickas modellen till viewn
             return View(showView);
 
 
     }
 
 
+    //Funktion för att returnera en privacy-sida
     public IActionResult Privacy()
     {
         return View();

@@ -1,21 +1,23 @@
 @model BookClub.Models.ChapterModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Radera kapitel";
 }
 
 <h1 class="text-center p-4">Radera kapitel</h1>
-
+<!--Sida för att kunna radera ett kapitel-->
 <h3 class="text-center">Är du säker på att du vill radera kapitlet?</h3>
 <div>
 
     <hr />
+<!--Kapitel visas med nummer, titel och bok titel-->
 <h4 class="text-center mt-5">Kapitel @Model.Number - @Model.Title</h4>    
 <h5 class="text-center mb-5">@Model.Book.Title</h5>
     
     <form asp-action="Delete">
+    <!--Knapp för att radera eller visa alla kapitel, id skickas som dolt med i formuläret-->
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Radera" class="delete deleteSiteBtn" /> |
+        <input type="submit" value="Radera" class="delete deleteSiteBtn" />
         <a asp-action="Index" class="editBack">Visa alla kapitel</a>
     </form>
 </div>

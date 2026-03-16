@@ -5,19 +5,22 @@
 }
 
 <h1 class="text-center m-5">Radera en kommentar</h1>
-
+<!--Sida för att kunna radera ett diskussionsinlägg-->
 <h3 class="text-center m-5">Är du säker på att du vill radera kommentaren?</h3>
 <div class="text-center">
     <hr />
     <div>
+        <!--Data från diskussionsinlägget med titel, innehåll, användare och datum-->
     <h4>@Model.Title</h4>
     <p>@Model.Content</p>
     <p class="text-muted">@Model.User</p>
     <p class="text-muted">@Model.CreatedAt.ToString(format:"yyyy-MM-dd")</p>        
     </div> 
     <form asp-action="Delete" class="mb-5">
+        <!--Id skickas med i formuläret, url skickas även med från föregående sida -->
         <input type="hidden" asp-for="Id" />
         <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+        <!--Knapp för att radera inlägget-->
         <input type="submit" value="Radera" class="delete deleteSiteBtn" /> 
 
     </form>

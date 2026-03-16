@@ -1,10 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Startsida";
 }
 @model BookClub.Models.HomeModel
-
+<!--Startsida för bokklubben-->
 <div class="Intro row d-flex justify-content-center flex-sm-column flex-md-row">
     <div class="IntroText col-12 col-sm-8 p-5 col-sm-12 col-lg-5 col-xxl-5">
+    <!--Titel, information och bild-->
        <h1 class="text-center">Bokhörnan</h1> 
        <p class="w-75 w-md-100 mx-auto">Välkommen till vår bokklubb! Här väljer vi varje månad ut en ny
         bok som vi läser tillsammans och kan diskutera under månadens gång. 
@@ -22,16 +23,19 @@
 </div>
 
 <div class="text-center bookOfMonth p-4">
+<!--Månadens bok presenteras-->
     <h2>Just nu läser vi</h2>
     <div class="monthContent w-lg-50 row p-5 d-flex justify-content-center flex-sm-column flex-md-row">
     @if (Model.CurrentBook != null)
     {
+    <!--Om det finns en bok visas den enligt följande struktur med bild, titel, författare och en kort beskrivning-->
         <div class="col-sm-12 col-md-6 col-lg-4 col-xxl-3">
              <img class="currentBookImg" src="@Model.CurrentBook.Image" />
         </div>
        <div class="col-sm-12 mt-5 col-xxl-4 col-md-6 col-lg-6 my-auto">
         <h3>@Model.CurrentBook.Title - @Model.CurrentBook.Author?.Name</h3>
         <p>@Model.CurrentBook.ShortDescription</p>
+        <!--Länk för att kunna komma till bokens sida-->
         <a asp-controller="Book" asp-action="Details" asp-route-id="@Model.CurrentBook.Id">Gå till bokens sida</a>
         </div>
     }
@@ -40,6 +44,7 @@
 
 <div class="questions p-3">
     <h2 class="text-center mb-5 mt-3">Hur det fungerar</h2>
+<!--Vanliga frågor för hemsidan-->
 <div class="questionList justify-content-center d-flex flex-column flex-lg-row col-md-12">
     <div class=" m-2 p-3 oneQuestion col-lg-4 col-md-8 mx-auto">
     <h3 class="text-center">Vilka böcker väljs?</h3>
@@ -70,12 +75,13 @@
 </div>
 
 
-
+<!--Presentation av de tre böckerna med högst betyg-->
 <h2 class="text-center p-5">Böckerna vi har gillat mest</h2>
 
   <div class="topBooks d-flex justify-content-center flex-column flex-md-row col-4 mx-auto"> 
 @foreach (var book in Model.TopRated)
 {
+<!--Varje bok ska presenteras ,ed betyg, bild och titel-->
  
 var average = book.Reviews.Any()
 ? book.Reviews.Average(r => r.Review)
@@ -89,4 +95,5 @@ var average = book.Reviews.Any()
 }
 </div>
 
+<!--Länk till att visa alla böcker på hemsidan-->
 <a class="nav-link text-dark showBooksBtn mb-5" asp-area="" asp-controller="Book" asp-action="Index">Visa alla böcker</a>

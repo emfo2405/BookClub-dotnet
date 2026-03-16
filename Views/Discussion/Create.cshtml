@@ -9,6 +9,7 @@
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
+    <!--Formulär för att kunna skapa ett nytt diskussionsinlägg med titel, innehåll och kapitel-id-->
         <form asp-action="Create">
             <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,6 +28,7 @@
                 <select asp-for="ChapterModelId" class ="form-control" asp-items="ViewBag.ChapterModelId"></select>
             </div>
             <div class="form-group">
+            <!--Knapp för att skicka in formuläret-->
                 <input type="submit" value="Skapa" class="update updateEdit" />
             </div>
         </form>
@@ -36,6 +38,7 @@
 
     @{
       if(ViewBag.responseMessage != null) {
+<!--Om AI-modereringen genererar en bedömning visas den här med bedömning och motivation-->
 <div class="mx-auto mt-4 border border-info bg-info bg-opacity-10 p-4 aiResponse">        
         <p class="fw-bold">@ViewBag.ResponseMessage</p>
         <p>@ViewBag.Motivation</p>
@@ -43,12 +46,12 @@
       }  
     }
     
-
-
 <div class="d-flex w-50 mx-auto">
     @if(!string.IsNullOrEmpty(ViewData["ReturnUrl"]?.ToString())) {
+        <!--Om en url har sparats från föregående sida visas den i länken här -->
         <a class="editBack mx-auto addBookBtn" href="@ViewData["ReturnUrl"]">Visa föregående sida</a>
     }
+    <!--En länk för att visa alla böcker visas här-->
         <a class="editBack mx-auto addBookBtn" asp-area="" asp-controller="Book" asp-action="Index">Visa alla böcker</a>
 </div>
 

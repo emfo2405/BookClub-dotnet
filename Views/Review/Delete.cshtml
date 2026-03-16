@@ -1,13 +1,14 @@
 @model BookClub.Models.ReviewModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Radera recension";
 }
-
+<!--Sida för att kunna radera en recension-->
 <h1 class="text-center p-4">Radera inlägget</h1>
 
 <h3 class="text-center">Är du säker på att du vill radera inlägget?</h3>
     <hr />
+<!--Recension struktureras med bild, titel, betyg, kommentar, användarnamn och datum-->
 <div class="text-center m-5">
 <img class="deleteImg" src="@Model.Book.Image" />    
 <h3>@Model.Book.Title</h3>
@@ -17,8 +18,10 @@
 
     
     <form asp-action="Delete">
+    <!--ID skickas med i formuläret som dold, det gör även url till föregående sida-->
         <input type="hidden" asp-for="Id" />
         <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+        <!--Knapp för att kunna radera ett inlägg-->
         <input type="submit" value="Radera" class="delete deleteSiteBtn" />
     </form>
 </div> 

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BookClub.Models
 {
+    //Modell för hur en diskussion ska struktureras
+    //Required-fält måste fyllas i
     public class DiscussionModel
     {
         //Properties
@@ -13,6 +15,7 @@ namespace BookClub.Models
         [Required]
         public string? Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        //Koppling till kapitel
         [Required]
         [Display(Name = "Chapter")]
         [ForeignKey("Chapter")]

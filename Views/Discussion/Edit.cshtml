@@ -5,18 +5,20 @@
 }
 
 <h1 class="text-center m-5">Uppdatera ett inlägg</h1>
-
+<!--Sida för att uppdatera ett diskussionsinlägg-->
 
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!--Id, användarens id och användarens användarnamn skickas med i formuläret som dolda-->
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" asp-for="UserName" />
+            <!--Länk till föregående sida skickas med-->
             <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-            <input type="hidden" 
+            <!--Formulär för titel, innehåll och kapitel-->
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Titel:</label>
                 <input asp-for="Title" class="form-control" />
@@ -33,6 +35,7 @@
                 <span asp-validation-for="ChapterModelId" class="text-danger"></span>
             </div>
             <div class="form-group mb-5">
+            <!--Knapp för att uppdatera inlägg-->
                 <input type="submit" value="Uppdatera" class="update updateEdit" />
             </div>
         </form>

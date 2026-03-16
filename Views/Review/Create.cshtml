@@ -1,7 +1,7 @@
 @model BookClub.Models.ReviewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Skapa recension";
 }
 
 <h1 class="text-center m-5">Lämna ett betyg</h1>
@@ -9,7 +9,9 @@
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
+        <!--Formulär för att kunna skapa en recension med betyg, kommentar och bok-id-->
         <form asp-action="Create">
+            <!--URL från föregående sida skickas med i formuläret som dold-->
             <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -26,8 +28,8 @@
                 <label asp-for="BookModelId" class="control-label">Bok:</label>
                 <select asp-for="BookModelId" class ="form-control" asp-items="ViewBag.BookModelId"></select>
             </div>
-            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
             <div class="form-group mb-5">
+            <!--Knapp för att skicka in ett formulär-->
                 <input type="submit" value="Skapa" class="update updateEdit"/>
             </div>
         </form>

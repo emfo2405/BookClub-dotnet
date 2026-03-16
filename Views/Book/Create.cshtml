@@ -1,7 +1,7 @@
 @model BookClub.Models.BookModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Skapa bok";
 }
 
 <h1 class="text-center mt-5 mb-3">Skapa en ny bok</h1>
@@ -9,6 +9,7 @@
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
+        <!--Formulär för att skapa en ny bok med titel, år, beskrivning, bild och författare-->
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -43,16 +44,19 @@
 </div>
 
 <div class="editBack">
+<!--Länk till att visa alla böcker-->
     <a asp-action="Index">Visa alla böcker</a>
 </div>
 
 <div class="mb-5 mt-5">
+<!--Länk till att skapa ett kapitel eller visa de som finns-->
     <h3 class="text-center">Lägg till kapitel för boken</h3>
     <a class="update updateEdit mx-auto addBookBtn mt-3 p-2" asp-area="" asp-controller="Chapter" asp-action="Create">Lägg till kapitel</a>
     <a class="editBack mx-auto addBookBtn mt-3 p-2" asp-area="" asp-controller="Chapter" asp-action="Index">Visa alla kapitel</a>
 </div>
 
 <div class="mb-5 mt-5">
+<!--Länk till att skapa en författare eller visa de som finns-->
     <h3 class="text-center">Lägg till en ny författare</h3>
     <a class="update updateEdit mx-auto addBookBtn mt-3 p-2" asp-area="" asp-controller="Author" asp-action="Create">Skapa en ny författarprofil</a>
     <a class="editBack mx-auto addBookBtn mt-3 p-2" asp-area="" asp-controller="Author" asp-action="Index">Visa alla författare</a>

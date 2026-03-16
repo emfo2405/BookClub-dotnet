@@ -1,7 +1,7 @@
 @model BookClub.Models.AuthorModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Radera författare";
 }
 
 <h1 class="text-center p-4">Radera författare</h1>
@@ -9,6 +9,7 @@
 <h3 class="text-center">Är du säker på att du vill radera författaren?</h3>
 <div class="authorBlock">
     <hr />
+    <!--Sida för att radera en författare-->
     <dl class="row">
         <span class="material-symbols-outlined" id="personImg">article_person</span>
         <h4 class="text-center">@Model.Name</h4>
@@ -20,8 +21,9 @@
     </dl>
 
     <form asp-action="Delete">
+        <!--Knapp för att radera och för att komma tillbaka till listan med alla författare-->
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Radera" class="delete deleteSiteBtn" /> |
+        <input type="submit" value="Radera" class="delete deleteSiteBtn" />
         <a asp-action="Index" class="editBack">Visa alla författare</a>
     </form>
 </div>

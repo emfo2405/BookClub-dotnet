@@ -1,5 +1,5 @@
 ﻿@inject BookClub.Data.ApplicationDbContext _context
-
+<!--Book of month hämtas baserat på den senast skapade boken och kan skickas med som id till månadens bok-->
 @{
             var bookOfMonth = _context.Book
             .OrderByDescending(b => b.Id)
@@ -24,13 +24,16 @@
 </head>
 <body>
     <header>
+<!--Navigation skapad för sidan-->
         <nav class="navbar navbar-expand-md">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BookClub</a>
+                <!--Menyknapp för små skärmar-->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!--Meny skapad-->
                 <div class="navbar-collapse collapse d-md-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -39,12 +42,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Alla böcker</a>
                         </li>
+                        <!--Book of month-länk med från bok details-sida med book of month-id som skickas med som argument-->
                         <li>
                             <a class="nav-link text-dark" asp-controller="Book" asp-action="Details" asp-route-id="@bookOfMonth?.Id">Månadens bok</a>
                         </li>
                         <li>
                             <a class="nav-link text-dark" asp-controller="Author" asp-action="Index">Våra författare</a>
                         </li>
+                        <!--Admin-sidan visas som en användare är inloggad som admin-->
                         <li class="nav-item">
                             @if(User.IsInRole("Admin")) {
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Create">Admin</a>                                

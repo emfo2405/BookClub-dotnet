@@ -1,7 +1,7 @@
 @model BookClub.Models.BookModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Uppdatera bok";
 }
 
 <h1 class="text-center p-4">Uppdatera information</h1>
@@ -11,6 +11,7 @@
 <div class="row form">
     <div class="col-md-4 formContent">
         <form asp-action="Edit">
+        <!--Formulär för att kunna uppdatera en bok-->
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -34,11 +35,13 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <!--Select för att kunna välja en författare till den skapade boken-->
                 <label asp-for="AuthorModelId" class="control-label">Författare:</label>
                 <select asp-for="AuthorModelId" class="form-control" asp-items="ViewBag.AuthorModelId"></select>
                 <span asp-validation-for="AuthorModelId" class="text-danger"></span>
             </div>
             <div class="form-group">
+            <!--Knapp för att kunna uppdatera boken-->
                 <input type="submit" value="Uppdatera" class="update updateEdit" />
             </div>
         </form>
@@ -46,6 +49,7 @@
 </div>
 
 <div  class="editBack">
+            <!--Länk för att komma tillbaka till listan med alla böcker-->
     <a asp-action="Index">Visa alla böcker</a>
 </div>
 

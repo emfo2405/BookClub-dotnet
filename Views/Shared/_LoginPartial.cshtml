@@ -2,6 +2,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<!--Kontroll om en användare är inloggad eller inte och visar knappar utifrån det-->
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {

@@ -1,7 +1,7 @@
 @model BookClub.Models.AuthorModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detaljer om författare";
 }
 
 <h1 class="text-center m-5">Om författaren</h1>
@@ -11,6 +11,7 @@
 
     <hr />
     <div class="authorDetails">
+    <!--Struktur för hur en författare visas på details-sidan-->
     <span class="material-symbols-outlined w-100" id="personImg">article_person</span>
     <h5 class="w-75 d-block mx-auto">Beskrivning</h5>    
     <p class="w-75 d-block mx-auto">@Model.Description</p>
@@ -20,6 +21,10 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="update updateEdit text-center d-block mx-auto">Uppdatera</a> |
+    <!--Om användaren är inloggad som admin visas en uppdateringsknapp-->
+    @if(User.IsInRole("Admin")){
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="update updateEdit text-center d-block mx-auto">Uppdatera</a>    
+    }
+    <!--Knapp för att visa alla författare-->
     <a asp-action="Index" class="editBack">Visa alla författare</a>
 </div>

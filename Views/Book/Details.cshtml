@@ -1,13 +1,15 @@
 @model BookClub.Models.BookModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detaljer för bok";
 }
 <div class="oneBookImg">
+<!--Titel för bok och författare-->
 <h1 class="text-center mt-5">@Html.DisplayFor(model => model.Title)</h1> 
 <h2 class="text-center mb-4">@Html.DisplayFor(model => model.Author.Name)</h2> 
 
 <div class="d-block mx-auto text-center mb-4">
+<!--Medelbetyg för boken, taget från användares recensioner-->
                 @if (@Model.AverageRating != null)
             {
                 <p>⭐ @Model.AverageRating?.ToString("0.0")</p>
@@ -22,6 +24,7 @@
     </div>
 
 <div class=" d-block mx-auto bookDetails mt-5">
+<!--Information om boken med år, beeskrivning, författarens land och namn-->
     <dl class="row">
         <dt class = "col-sm-12 col-md-2">
             År
@@ -45,6 +48,7 @@
             Författare
         </dt>
         <dd class = "col-sm-12 col-md-10">
+        <!--Länk till författarens sida-->
             <a asp-controller="Author" asp-action="Details" asp-route-id="@Model.Author.Id" class="mt-2">@Model.Author.Name</a>
         </dd>
 
@@ -55,13 +59,14 @@
 
 
 <div class="d-flex oneBookButtons">
+<!--Om användaren är inloggad ska en knapp för att kunna uppdatera boken visas-->
     @if (User.IsInRole("Admin"))
 {
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="update updateOneBook">Redigera information</a> 
 }
 
 
-
+<!--Länk till att visa alla böcker-->
 <a asp-action="Index" class="showInfo showInfoOneBook">Visa alla böcker</a>
 
 </div>
@@ -70,31 +75,40 @@
 
 
 <div class="mt-5 d-block mx-auto">
+<!--Diskussionsforum-->
     <h2 class="mb-5 text-center">Diskussionsforum för varje kapitel:</h2>
 
 
     @foreach (ChapterModel chapter in Model.Chapters.OrderBy(c => c.Number))
+
     {
+<!--för varje kapitel visas tillhörande diskussionsinlägg-->
         <div class="d-block mx-auto chapterBlock">
+        <!--Klick på knappen visar de inlägg som har gjorts för boken-->
         <h4 class="text-center" data-bs-toggle="collapse" data-bs-target="#review-@chapter.Id">Kapitel @chapter.Number - @chapter.Title <span class="material-symbols-outlined align-middle">keyboard_arrow_down</span></h4>
 <div class="collapse reviewView" id="review-@chapter.Id">  
      
+
 @if (User.Identity.IsAuthenticated)
 {
+<!--Om en användare är inloggad ska den kunna skapa ett inlägg i forum-->
     <a asp-controller="Discussion" asp-action="Create" asp-route-chapterId="@chapter.Id" class="takePartDiscussion mb-3">Delta i diskussionen</a>
 }
 @if (chapter.Discussions != null && chapter.Discussions.Any())
 {
+<!--Varje diskussionsinlägg ska skrivas ut enligt förljande struktur-->
   
             @foreach (var discussion in chapter.Discussions.OrderBy(d => d.CreatedAt))
         {
             <div class="oneComment">
-            @if (User.Identity.Name == discussion.UserName) {
+            @if (User.Identity.Name == discussion.UserName || User.IsInRole("Admin")) {
+            <!--Om den inloggade användaren är samma som den som skapat ett inlägg eller inloggad som admin ska knappar för att kunna uppdatera eller radera synas-->
             <div class="discussionButtons d-flex">
             <a asp-controller="Discussion" asp-action="Edit" asp-route-id="@discussion.Id" class="update updateDiscussion"><span class="material-symbols-outlined align-middle">edit</span></a>
             <a asp-controller="Discussion" asp-action="Delete" asp-route-id="@discussion.Id" class="delete deleteDiscussion"><span class="material-symbols-outlined align-middle">delete</span></a>
             </div>
     }
+            <!--Inläggen ska skrivas ut med titel, innehåll, användarnamn och tid för skapandet-->
             <h5>@discussion.Title</h5>
             <p>@discussion.Content</p>
             <p class="text-muted">@discussion.UserName - @discussion.CreatedAt.ToString("yyyy-MM-dd")</p>
@@ -104,6 +118,7 @@
         }
  
 } else {
+    <!--Om inga inlägg finns skrivs istället nedanstående ut-->
     <p class="text-center">Inga diskussionsinlägg finns ännu</p>
   
    
@@ -116,16 +131,20 @@
 }
 
 <h2 class="mb-5 mt-5 text-center">Betyg för boken</h2>
+<!--Recensioner för en bok skrivs ut-->
 <div class="d-block mx-auto reviewBlock">
 @foreach (var review in Model.Reviews.OrderBy(r => r.Id))
 {
+<!--Varje skapad recension ska skrivas ut enligt följande-->
     <div class="oneReview">
         <div class="d-flex discussionButtons">
     @if (User.Identity.Name == review.UserName || User.IsInRole("Admin")) {
+            <!--Om den inloggade användaren är samma som den som skapat ett inlägg eller inloggad som admin ska knappar för att kunna uppdatera eller radera synas-->
         <a asp-controller="Review" asp-action="Edit" asp-route-id="@review.Id" class="update updateDiscussion"><span class="material-symbols-outlined align-middle">edit</span></a>
         <a asp-controller="Review" asp-action="Delete" asp-route-id="@review.Id" class="delete deleteDiscussion"><span class="material-symbols-outlined align-middle">delete</span></a>
     }
 </div>
+    <!--En recension skrivs ut med betyg, kommentar, användarnamn och datum det skapades-->
     <h2>⭐ @review.Review</h2>
     <h3>@review.Comment</h3>
     <p class="text-muted">@review.UserName - @review.CreatedAt.ToString("yyyy-MM-dd")</p>
@@ -137,6 +156,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {
+    <!--Om en användare är inloggad ska den kunna lämna ett betyg-->
     <a asp-controller="Review" asp-action="Create" asp-route-bookId="@Model.Id" class="text-center takePartReview">Lämna ett betyg</a>
 }
 </div>

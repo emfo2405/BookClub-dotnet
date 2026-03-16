@@ -1,7 +1,7 @@
 @model BookClub.Models.ChapterModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Skapa kapitel";
 }
 
 <h1 class="text-center m-5">Lägg till kapitel</h1>
@@ -9,6 +9,7 @@
 <hr />
 <div class="row form">
     <div class="col-md-4 formContent">
+<!--Formulär för att kunna skapa ett kapitel med titel, nummer och bok-id-->
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -26,6 +27,7 @@
                 <select asp-for="BookModelId" class ="form-control" asp-items="ViewBag.BookModelId"></select>
             </div>
             <div class="form-group">
+            <!--Länk för att lägga till kapitlet-->
                 <input type="submit" value="Skapa" class="update updateEdit" />
             </div>
         </form>
@@ -33,6 +35,7 @@
 </div>
 
 <div class="editBack">
+<!--Länk för att visa alla kapitel-->
     <a asp-action="Index">Visa alla kapitel</a>
 </div>
 
