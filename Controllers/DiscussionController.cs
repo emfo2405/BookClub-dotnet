@@ -114,7 +114,25 @@ namespace BookClub.Controllers
 
                 await _context.SaveChangesAsync();
 
-                            if (!string.IsNullOrEmpty(returnUrl))
+            //Lägg till promt till AI
+            try
+                {
+                    var moderationPromt = @"Du är en AI för innehållsmoderering för en bokklubb och ska 
+                    kontrollera innehåll som publiceras till ett diskussionsforum. Analysera följande 
+                    innehåll skapat av en användare och bedöm om det är lämpligt innehåll för diskussionsforumet.
+                    Svara på svenska.
+                    Svara i ren , korrekt JSON utan markdown i följande format:
+                    {
+                    IsAllowed: true/false,
+                    Reason: text
+                    }
+                    där du förklarar och motiverar din bedömning.
+                    Användarinnehåll: ''" + discussionModel.Content + @"''";
+                }
+                    
+                }
+
+            if (!string.IsNullOrEmpty(returnUrl))
             {
                 return Redirect(returnUrl);
             }
