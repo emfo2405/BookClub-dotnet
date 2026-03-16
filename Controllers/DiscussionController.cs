@@ -11,17 +11,27 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.IO.Compression;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using OpenAI.Chat;
 
 namespace BookClub.Controllers
 {
     public class DiscussionController : Controller
     {
-        private readonly ApplicationDbContext _context;
 
-        public DiscussionController(ApplicationDbContext context)
+
+        private readonly ApplicationDbContext _context;
+        private readonly ChatClient _chatClient;
+
+        public DiscussionController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+
+            var openAIKey = configuration["OpenAI:ApiKey"];
+            var modelName = configuration["model"];
+
+            _chatClient = new ChatClient(modelName, openAIKey);            
         }
+
 
         // GET: Discussion
         public async Task<IActionResult> Index()
