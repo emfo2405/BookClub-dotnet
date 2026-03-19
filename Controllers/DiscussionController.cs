@@ -28,8 +28,8 @@ namespace BookClub.Controllers
         {
             _context = context;
             //API-key för openAI inkluderas och AI-modell inkluderas
-            var openAIKey = configuration["OpenAI:ApiKey"];
-            var modelName = configuration["OpenAI:Model"];
+            var openAIKey = configuration["OpenAI--ApiKey"];
+            var modelName = configuration["OpenAI--Model"];
             //Ny chatClient instans skapas
             _chatClient = new ChatClient(modelName, openAIKey);            
         }
