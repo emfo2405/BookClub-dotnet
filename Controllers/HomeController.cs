@@ -21,17 +21,8 @@ public class HomeController : Controller
         //Visa senaste bok och inkludera relationer, sorteras på id
         var currentBook = await _context.Book
             .Include(b => b.Author)
-            .Include(d => d.Chapters)
-            .ThenInclude(c => c.Discussions)
-            .ThenInclude(d => d.User)
             .OrderByDescending(b => b.Id)
             .FirstOrDefaultAsync();
-
-        //Ta ut senaste kommentar från den senaste boken, sorteras på id
-        var latestComment = currentBook?.Chapters
-        .SelectMany(c => c.Discussions)
-        .OrderByDescending(d => d.Id)
-        .FirstOrDefault();
 
 
     //Visa högst betygsatta böcker och inkludera relationer, sorteras efter högst medelvärde av betyg och visar tre böcker
@@ -48,7 +39,6 @@ public class HomeController : Controller
         {
             CurrentBook = currentBook,
             TopRated = topRated,
-            LatestComment = latestComment
         };
 
             //Skickas modellen till viewn
