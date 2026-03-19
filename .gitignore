@@ -6,6 +6,15 @@
 # dotenv files
 .env
 
+#Byggfiler
+bin/
+obj/
+
+#Databasfiler
+*.db
+*.db-smh
+*.db-wal
+
 # User-specific files
 *.rsuser
 *.suo
