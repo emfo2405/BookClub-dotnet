@@ -94,6 +94,7 @@ namespace BookClub.Controllers
             .ToList();
             //Skapar en dropdown lista där förvalda är det kapitlet användaren klickade på
             ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", chapterId);
+            ViewData["BookId"] = chapter.BookModelId;
             return View();
         }
 
@@ -103,8 +104,15 @@ namespace BookClub.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel, string returnUrl)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,CreatedAt,ChapterModelId")] DiscussionModel discussionModel, string returnUrl, int bookId)
         {
+            //Hämtar alla kapitel för boken med id BookModelId
+            var chapters = _context.Chapter
+            .Include(c => c.Book)
+            .Where(c => c.BookModelId == bookId)
+            //Skapar en lista där kapitel visas med nummer och namn för den valda boken
+            .Select(c => new{c.Id, Display = "Kapitel " + c.Number + " - " + c.Book.Title})
+            .ToList();
             
             //Kontroll av input
             if (ModelState.IsValid)
@@ -143,7 +151,7 @@ namespace BookClub.Controllers
                     if(moderationResult == null)
                     {
                     ViewBag.ResponseMessage = "Kunde inte tolka svaret...";
-                    ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
                     return View(discussionModel);
                     }
                     //Om användarens inlägg är tillåtet sparas inlägget och läggs till i forumet
@@ -153,13 +161,13 @@ namespace BookClub.Controllers
                         await _context.SaveChangesAsync();
                     ViewBag.ResponseMessage = "Inlägget är godkänt för publicering"; 
                     ViewBag.Motivation = moderationResult.Motivation;
-                    ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
                         return View(discussionModel);
                     }
                     //Om användarens inlägg inte är tillåtet och läggs inte till
                     ViewBag.ResponseMessage = "Inlägget är inte tillåtet"; 
                     ViewBag.Motivation = moderationResult.Motivation;
-                    ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
                     return View(discussionModel);
                 //Fel fångas upp
                 } catch (Exception ex)
@@ -170,7 +178,7 @@ namespace BookClub.Controllers
                     
                 
             }
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Number", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
             return View(discussionModel);
         }
 
