@@ -29,8 +29,7 @@ public class HomeController : Controller
     var topRated = await _context.Book
         .Include(b => b.Author)
         .Include(b => b.Reviews)
-        .OrderByDescending(b => b.Reviews.Any()
-        ? b.Reviews.Average(r => r.Review) : 0)
+        .OrderByDescending(b => b.AverageRating ?? 0)
         .Take(3)
         .ToListAsync();
 
