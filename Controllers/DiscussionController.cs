@@ -151,7 +151,7 @@ namespace BookClub.Controllers
                     if(moderationResult == null)
                     {
                     ViewBag.ResponseMessage = "Kunde inte tolka svaret...";
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", discussionModel.ChapterModelId);
                     return View(discussionModel);
                     }
                     //Om användarens inlägg är tillåtet sparas inlägget och läggs till i forumet
@@ -161,24 +161,25 @@ namespace BookClub.Controllers
                         await _context.SaveChangesAsync();
                     ViewBag.ResponseMessage = "Inlägget är godkänt för publicering"; 
                     ViewBag.Motivation = moderationResult.Motivation;
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", discussionModel.ChapterModelId);
                         return View(discussionModel);
                     }
                     //Om användarens inlägg inte är tillåtet och läggs inte till
                     ViewBag.ResponseMessage = "Inlägget är inte tillåtet"; 
                     ViewBag.Motivation = moderationResult.Motivation;
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", discussionModel.ChapterModelId);
                     return View(discussionModel);
                 //Fel fångas upp
                 } catch (Exception ex)
                 {
                  Console.WriteLine("Error " + ex);
+                             ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", discussionModel.ChapterModelId);
                 return View(discussionModel);
                 }
                     
                 
             }
-            ViewData["ChapterModelId"] = new SelectList(_context.Chapter, "Id", "Display", discussionModel.ChapterModelId);
+            ViewData["ChapterModelId"] = new SelectList(chapters, "Id", "Display", discussionModel.ChapterModelId);
             return View(discussionModel);
         }
 
