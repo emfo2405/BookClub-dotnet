@@ -9,6 +9,7 @@
 #Byggfiler
 bin/
 obj/
+appsettings.Development.json
 
 #Databasfiler
 *.db
