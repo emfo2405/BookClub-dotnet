@@ -11,25 +11,25 @@ body {
 }
 
 .bookOfMonth {
-  background-color: #DBC6BF;
+  background-color: #FCEADB;
   margin-top: 0px;
 }
 
 a {
-  color: #523930;
+  color: #724540;
   text-underline-offset: 5px;
 }
 
 .questions {
-  background-color: #523930;
+  background-color: #DBB09F;
 }
 
 .questions h3 {
-  color: #523930;
+  color: #724540;
 }
 
 .oneQuestion {
-  background-color: #fffcf6;
+  background-color: #FCEADB;
   border-radius: 20px;
 }
 
@@ -61,7 +61,7 @@ a {
 .delete{
   text-decoration: none;
   border: 2px solid #bd7e7e;
-  background-color: #DBC6BF;
+  background-color: #FCEADB;
   width: 110px;
   margin: 0 auto;
   border-radius: 20px; 
@@ -78,7 +78,7 @@ a {
 .update{
   text-decoration: none;
   border: 2px solid #e6c07b;
-  background-color: rgb(248, 244, 210);
+  background-color: #FCEADB;
   width: 110px;
   margin: 0 auto;
   border-radius: 20px; 
@@ -94,8 +94,8 @@ a {
 
 .showInfo, .takePartDiscussion, .takePartReview{
   text-decoration: none;
-  border: 2px solid 523930;
-  background-color: #D2B8B0;
+  border: 2px solid #8B6457;
+  background-color: #FCEADB;
   width: 160px;
   margin: 0 auto;
   border-radius: 20px; 
@@ -105,7 +105,7 @@ a {
 }
 
 .showInfo:hover {
-  background-color: #E4D4CF;
+  background-color: #DBB09F;
 }
 
 .takePartDiscussion, .takePartReview {
@@ -114,21 +114,20 @@ a {
 }
 
 .takePartDiscussion {
-  background-color: #DBC6BF;
-  border: 2px solid #523930;
+  background-color: #FCEADB;
 }
 
 .takePartDiscussion:hover {
-  background-color: #D2B8B0;
+  background-color: #DBB09F;
 }
 
 .takePartReview {
-  background-color: #DBC6BF;
-  border: 2px solid #523930
+  background-color: #FCEADB;
+  border: 2px solid #8B6457;
 }
 
 .takePartReview:hover {
-  background-color: #D2B8B0
+  background-color: #DBB09F;
 }
 
 .updateOneBook, .showInfoOneBook {
@@ -164,18 +163,18 @@ margin-top: 50px;
 .showBooksBtn {
   text-align: center;
   padding: 10px;
-  border: 2px solid #523930;
+  border: 2px solid #8B6457;
   width: 150px;
   margin: 0 auto;
   border-radius: 20px;
-  background-color: #DBC6BF;
+  background-color: #FCEADB;
   margin-bottom: 20px;
   color: black;
   text-decoration: none;
 }
 
 .showBooksBtn:hover {
-  background-color: #D2B8B0;
+  background-color: #DBB09F;
 }
 
 .bookDisplayImg {
@@ -202,8 +201,8 @@ h4, h5, h6, p {
 }
 
 .oneBook {
-  background-color: #E4D4CF;
-  border: 2px solid #523930;
+  background-color: #FCEADB;
+  border: 2px solid #8B6457;
   border-radius: 20px;
   margin: 20px;
   padding: 30px;
@@ -212,22 +211,22 @@ h4, h5, h6, p {
 .oneBook img {
   margin: 10px;
   margin-bottom: 20px;
-  border: 10px solid #fcfbef;
+  border: 10px solid #fffbf3;
 }
 
 .descriptionView {
-  background-color: #F6F1EF;
+  background-color: #DBB09F;
   border-radius: 20px;;
 }
 
 .descriptionViewIndex {
-    background-color: #F6F1EF;
+    background-color: #DBB09F;
   border-radius: 20px;
   padding: 20px;
 }
 
 .oneComment {
-  background-color: #fcfbe3;
+  background-color: #FCEADB;
   padding: 20px;
   margin: 20px;
   border-radius: 10px;
@@ -235,8 +234,8 @@ h4, h5, h6, p {
 }
 
 .chapterBlock {
-  background-color: #E4D4CF;
-  border: 2px solid #523930;
+  background-color: #DBB09F;
+  border: 2px solid #8B6457;
   margin: 20px;
   border-radius: 20px;
   padding-bottom: 20px;
@@ -262,12 +261,12 @@ cursor: pointer;
 .oneReview {
   margin: 20px;
   padding: 20px;
-  background-color: #E4D4CF;
+  background-color: #FCEADB;
   border-radius: 10px;
 }
 
 .reviewBlock {
-  background-color: #A47160;
+  background-color: #DBB09F;
   padding-top: 20px;
   padding-bottom: 30px;
   margin-bottom: 50px;
@@ -277,7 +276,7 @@ cursor: pointer;
 }
 
 .oneBookImg {
-  background-color: #E4D4CF;
+  background-color: #fffbf3;
   padding: 50px;
   padding-top: 10px;
   padding-bottom: 80px;
@@ -312,11 +311,11 @@ margin-bottom: 5px;
 .updateEdit {
 margin-left: 0px;
 background-color: transparent;
-border: 2px solid #f0df94;
+border: 2px solid #C18468;
 }
 
 .updateEdit:hover {
-  background-color: #f8f4d2;
+  background-color: #C18468;
 }
 
 .editBack {
@@ -366,7 +365,7 @@ border: 2px solid #f0df94;
 }
 
 .authorBlock {
-  background-color: #E4D4CF;
+  background-color: #FCEADB;
   padding-bottom: 40px;
   margin-bottom: 50px;
 }
@@ -387,14 +386,14 @@ border: 2px solid #f0df94;
 }
 
 #authorDescription {
-  background-color: #F6F1EF;
+  background-color: #FCEADB;
   padding: 20px;
   border-radius: 10px;;
 }
 
 .authorProfile {
-  background-color: #E4D4CF;
-  border: 2px solid #523930;
+  background-color: #DBB09F;
+  border: 2px solid #8B6457;
   border-radius: 20px;
   width: 500px;
   padding: 20px;
@@ -449,7 +448,7 @@ justify-content: center;
 }
 
 footer {
-  background-color: #A47160;
+  background-color: #DBB09F;
   padding: 10px;
 }
 
@@ -458,7 +457,7 @@ nav li {
 }
 
 nav li:hover {
-  background-color: #DBC6BF;
+  background-color: #FCEADB;
   border-radius: 10px;
 }
 

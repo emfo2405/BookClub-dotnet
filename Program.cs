@@ -13,7 +13,7 @@ static async Task SetAdmin(IServiceProvider serviceProvider)
         await roleManager.CreateAsync(new IdentityRole("Admin"));
     }
 
-    var adminUser = await userManager.FindByEmailAsync("emfo2405@student.miun.se");
+    var adminUser = await userManager.FindByEmailAsync("admin@mail.se");
     if(adminUser != null)
     {
         await userManager.AddToRoleAsync(adminUser, "Admin");
