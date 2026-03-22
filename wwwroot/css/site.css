@@ -215,12 +215,12 @@ h4, h5, h6, p {
 }
 
 .descriptionView {
-  background-color: #DBB09F;
+  background-color: rgb(236, 204, 191);
   border-radius: 20px;;
 }
 
 .descriptionViewIndex {
-    background-color: #DBB09F;
+    background-color: rgb(236, 204, 191);
   border-radius: 20px;
   padding: 20px;
 }
@@ -310,12 +310,12 @@ margin-bottom: 5px;
 
 .updateEdit {
 margin-left: 0px;
-background-color: transparent;
-border: 2px solid #C18468;
+background-color: #FCEADB;
+border: 2px solid #8B6457;
 }
 
 .updateEdit:hover {
-  background-color: #C18468;
+  background-color: #DBB09F;
 }
 
 .editBack {
@@ -392,7 +392,7 @@ border: 2px solid #C18468;
 }
 
 .authorProfile {
-  background-color: #DBB09F;
+  background-color: #FCEADB;
   border: 2px solid #8B6457;
   border-radius: 20px;
   width: 500px;
