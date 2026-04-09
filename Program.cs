@@ -2,23 +2,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using BookClub.Data;
 
-//Lägga till roller till användare
-static async Task SetAdmin(IServiceProvider serviceProvider)
-{
-    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
-    if (!await roleManager.RoleExistsAsync("Admin"))
-    {
-        await roleManager.CreateAsync(new IdentityRole("Admin"));
-    }
-
-    var adminUser = await userManager.FindByEmailAsync("admin@mail.se");
-    if(adminUser != null)
-    {
-        await userManager.AddToRoleAsync(adminUser, "Admin");
-    }
-}
 
 var builder = WebApplication.CreateBuilder(args);
 // Convert railway database-URL to Npgsql
@@ -80,7 +63,28 @@ app.MapRazorPages()
 
    using (var scope = app.Services.CreateScope())
 {
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await db.Database.MigrateAsync();
     await SetAdmin(scope.ServiceProvider);
 }
 
 app.Run();
+
+
+//Lägga till roller till användare
+static async Task SetAdmin(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole("Admin"));
+    }
+
+    var adminUser = await userManager.FindByEmailAsync("admin@mail.se");
+    if(adminUser != null)
+    {
+        await userManager.AddToRoleAsync(adminUser, "Admin");
+    }
+}
