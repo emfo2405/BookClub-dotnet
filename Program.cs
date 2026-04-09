@@ -29,8 +29,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     {
         sqlOptions.EnableRetryOnFailure(
             maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(30),
-            errorNumbersToAdd: null
+            maxRetryDelay: TimeSpan.FromSeconds(30)
         );
     }));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
