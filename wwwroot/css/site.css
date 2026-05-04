@@ -21,7 +21,7 @@ a {
 }
 
 .questions {
-  background-color: #cab4a6;
+  background-color: #724540;
 }
 
 .questions h3 {
@@ -234,7 +234,7 @@ h4, h5, h6, p {
 }
 
 .chapterBlock {
-  background-color: #cab4a6;
+  background-color: #fceadb;
   border: 2px solid #8B6457;
   margin: 20px;
   border-radius: 20px;
@@ -266,7 +266,7 @@ cursor: pointer;
 }
 
 .reviewBlock {
-  background-color: #cab4a6;
+  background-color: #fceadb;
   padding-top: 20px;
   padding-bottom: 30px;
   margin-bottom: 50px;
@@ -448,7 +448,7 @@ justify-content: center;
 }
 
 footer {
-  background-color: #cab4a6;
+  background-color: #fceadb;
   padding: 10px;
 }
 
