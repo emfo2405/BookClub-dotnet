@@ -24,6 +24,10 @@ a {
   background-color: #724540;
 }
 
+.questions h2 {
+  color: #FCEADB;
+}
+
 .questions h3 {
   color: #724540;
 }
@@ -105,7 +109,7 @@ a {
 }
 
 .showInfo:hover {
-  background-color: #cab4a6;
+  background-color: #ebd2c3;
 }
 
 .takePartDiscussion, .takePartReview {
@@ -118,7 +122,7 @@ a {
 }
 
 .takePartDiscussion:hover {
-  background-color: #cab4a6;
+  background-color: #ebd2c3;
 }
 
 .takePartReview {
@@ -127,7 +131,7 @@ a {
 }
 
 .takePartReview:hover {
-  background-color: #cab4a6;
+  background-color: #ebd2c3;
 }
 
 .updateOneBook, .showInfoOneBook {
@@ -174,7 +178,7 @@ margin-top: 50px;
 }
 
 .showBooksBtn:hover {
-  background-color: #cab4a6;
+  background-color: #ebd2c3;
 }
 
 .bookDisplayImg {
@@ -201,7 +205,7 @@ h4, h5, h6, p {
 }
 
 .oneBook {
-  background-color: #FCEADB;
+  background-color: #fffcf6;
   border: 2px solid #8B6457;
   border-radius: 20px;
   margin: 20px;
@@ -231,6 +235,9 @@ h4, h5, h6, p {
   margin: 20px;
   border-radius: 10px;
   margin-bottom: 40px;
+    background-color: #fffcf6;
+  border-radius: 10px;
+  border: 2px solid #c49b8d;
 }
 
 .chapterBlock {
@@ -261,8 +268,9 @@ cursor: pointer;
 .oneReview {
   margin: 20px;
   padding: 20px;
-  background-color: #FCEADB;
+  background-color: #fffcf6;
   border-radius: 10px;
+  border: 2px solid #c49b8d;
 }
 
 .reviewBlock {
@@ -273,6 +281,7 @@ cursor: pointer;
    border-radius: 20px;
    max-width: 700px;
    width: 80%;
+   border: 2px solid #8B6457;
 }
 
 .oneBookImg {
@@ -315,7 +324,7 @@ border: 2px solid #8B6457;
 }
 
 .updateEdit:hover {
-  background-color: #cab4a6;
+  background-color: #ebd2c3;
 }
 
 .editBack {
@@ -392,7 +401,7 @@ border: 2px solid #8B6457;
 }
 
 .authorProfile {
-  background-color: #FCEADB;
+  background-color: #fffcf6;
   border: 2px solid #8B6457;
   border-radius: 20px;
   width: 500px;
@@ -448,7 +457,7 @@ justify-content: center;
 }
 
 footer {
-  background-color: #fceadb;
+  background-color: #e4d0c0;
   padding: 10px;
 }
 
