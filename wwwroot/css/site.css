@@ -21,7 +21,7 @@ a {
 }
 
 .questions {
-  background-color: #a8856d;
+  background-color: #cab4a6;
 }
 
 .questions h3 {
@@ -105,7 +105,7 @@ a {
 }
 
 .showInfo:hover {
-  background-color: #a8856d;
+  background-color: #cab4a6;
 }
 
 .takePartDiscussion, .takePartReview {
@@ -118,7 +118,7 @@ a {
 }
 
 .takePartDiscussion:hover {
-  background-color: #a8856d;
+  background-color: #cab4a6;
 }
 
 .takePartReview {
@@ -127,7 +127,7 @@ a {
 }
 
 .takePartReview:hover {
-  background-color: #a8856d;
+  background-color: #cab4a6;
 }
 
 .updateOneBook, .showInfoOneBook {
@@ -174,7 +174,7 @@ margin-top: 50px;
 }
 
 .showBooksBtn:hover {
-  background-color: #a8856d;
+  background-color: #cab4a6;
 }
 
 .bookDisplayImg {
@@ -234,7 +234,7 @@ h4, h5, h6, p {
 }
 
 .chapterBlock {
-  background-color: #a8856d;
+  background-color: #cab4a6;
   border: 2px solid #8B6457;
   margin: 20px;
   border-radius: 20px;
@@ -266,7 +266,7 @@ cursor: pointer;
 }
 
 .reviewBlock {
-  background-color: #a8856d;
+  background-color: #cab4a6;
   padding-top: 20px;
   padding-bottom: 30px;
   margin-bottom: 50px;
@@ -315,7 +315,7 @@ border: 2px solid #8B6457;
 }
 
 .updateEdit:hover {
-  background-color: #a8856d;
+  background-color: #cab4a6;
 }
 
 .editBack {
@@ -448,7 +448,7 @@ justify-content: center;
 }
 
 footer {
-  background-color: #a8856d;
+  background-color: #cab4a6;
   padding: 10px;
 }
 
