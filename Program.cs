@@ -72,8 +72,6 @@ app.MapRazorPages()
     await SetAdmin(scope.ServiceProvider);
 }
 
-app.Run();
-
 
 //Lägga till roller till användare
 static async Task SetAdmin(IServiceProvider serviceProvider)
@@ -92,3 +90,7 @@ static async Task SetAdmin(IServiceProvider serviceProvider)
         await userManager.AddToRoleAsync(adminUser, "Admin");
     }
 }
+
+app.Run();
+
+
