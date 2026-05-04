@@ -14,7 +14,7 @@ namespace BookClub.Models
         public string? Title { get; set; }
         [Required]
         public string? Content { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         //Koppling till kapitel
         [Required]
         [Display(Name = "Chapter")]
